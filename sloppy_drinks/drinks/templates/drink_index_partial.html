@@ -1,0 +1,21 @@
+{% load static %}
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="drinks">
+        {% for image in page.object_list %}
+        <div class="col drink">
+            <div class="card shadow-sm">
+                <a href="{% url 'drink_detail' image.drink.slug %}">
+                    <img class="card-img-top" src="{% static 'drinks/images/'|add:image.filename %}"
+                        alt="{{ image.drink.name }}">
+                </a>
+            </div>
+            {% if page.has_next and forloop.last %}
+            <span id="infinite-scroll-container" hx-get="{% url 'drink_index_partial' %}?page={{ page.next_page_number }}" hx-swap="beforeend"
+                hx-target="#drinks" hx-select=".drink" hx-trigger="revealed" hx-include="#search-bar" hx-vals='js:{sort: getSortOrder()}'>
+            </span>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,76 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sloppy Drinks{% endblock title %}</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'drinks/images/the-sloppy-boys-podcast-glass-logo-circle.png' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'drinks/css/styles.css' %}">
+    <script src="https://unpkg.com/htmx.org@1.9.10"
+        integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC"
+        crossorigin="anonymous"></script>
+</head>
+
+<body class="d-flex flex-column h-100 bg-dark">
+    <nav class="navbar navbar-dark shadow-sm fixed-top">
+        <div class="container-fluid">
+            <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none me-2 lh-1">
+                <img class="navbar-icon me-2" src="{% static 'drinks/images/the-sloppy-boys-podcast-glass-logo-square.jpeg' %}"
+                    width="40" height="40">
+                <span class="navbar-brand fs-4">Sloppy Drinks</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbar-collapse-section" aria-controls="navbar-collapse-section" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 col-md-7 py-4">
+                        <h4 class="nav-about-heading">About</h4>
+                        <p class="nav-about-text">The website that takes a deep dive into the podcast that takes a deep
+                            dive into the drinks that you love.</p>
+                    </div>
+                    <div class="col-sm-4 offset-md-1 py-4">
+                        <h4 class="nav-contact-heading">Contact</h4>
+                        <ul class="list-unstyled">
+                            <li><a class="text-dark" href="mailto:emmett@sloppydrinks.com">Email me</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+        {% block page_content %}{% endblock page_content %}
+    </main>
+    <footer class="mt-auto py-3">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center">
+            <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none me-2 lh-1">
+                <img class="footer-icon me-2" src="{% static 'drinks/images/the-sloppy-boys-podcast-glass-logo-square.jpeg' %}"
+                    width="20" height="20">
+                <span class="footer-text">Sloppy Drinks</span>
+            </a>
+            <span class="footer-text">©
+                <script type="text/JavaScript">document.write(new Date().getFullYear());</script> Emmett Rogers
+            </span>
+        </div>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'drinks/javascript/index.js' %}"></script>
+</body>
+
+</html>
