@@ -5,10 +5,16 @@ class Ingredient(models.Model):
     """Model representing a drink ingredient"""
     name = models.CharField(max_length=100, primary_key=True, help_text='Enter an ingredient name (e.g. Simple Syrup)')
 
+    def __str__(self):
+        return f"{self.name}"
+
 class RecipeSource(models.Model):
     """Model representing a recipe source"""
     name = models.CharField(max_length=100, primary_key=True)
     url = models.URLField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 class Drink(models.Model):
     """Model representing a drink"""
@@ -17,6 +23,9 @@ class Drink(models.Model):
     ingredients = models.ManyToManyField(Ingredient, help_text='Select the ingredients for this drink')
     recipe_source = models.ForeignKey(RecipeSource, blank=True, null=True, on_delete=models.PROTECT)
     recipe_url = models.URLField(max_length=200, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 class Episode(models.Model):
     """Model representing an Episode"""
@@ -32,6 +41,9 @@ class Episode(models.Model):
 class ImageSource(models.Model):
     """Model representing an image source"""
     name = models.CharField(max_length=100, primary_key=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 class Image(models.Model):
     """Model representing an image"""
