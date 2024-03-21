@@ -24,10 +24,10 @@ class Episode(models.Model):
     drink = models.ForeignKey(Drink, on_delete=models.PROTECT)
     title = models.CharField(max_length=200, unique=True)
     date = models.DateField(unique=True)
-    acast_url = models.URLField(max_length=200, default='https://play.acast.com/s/thesloppyboys/')
-    spotify_url = models.URLField(max_length=200, default='https://open.spotify.com/show/3qFjDCQ16YrjFw5ufNpV3c?si=4202cac534494845')
+    apple_podcast_url = models.URLField(max_length=200, default='https://podcasts.apple.com/us/podcast/the-sloppy-boys/id1537187838')
+    spotify_url = models.URLField(max_length=200, default='https://open.spotify.com/show/3qFjDCQ16YrjFw5ufNpV3c')
     instagram_post_url = models.URLField(max_length=200, blank=True, null=True)
-    twitter_post_url = models.URLField(max_length=200, blank=True, null=True)
+    x_post_url = models.URLField(max_length=200, blank=True, null=True)
 
 class ImageSource(models.Model):
     """Model representing an image source"""
