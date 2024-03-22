@@ -67,6 +67,13 @@ footer {
 .apple-podcasts-icon-link {
     color: black;
     text-decoration: none;
+    padding-right: 10px;
+}
+
+.youtube-icon-link {
+    color: black;
+    text-decoration: none;
+    padding-right: 10px;
 }
 
 .instagram-icon-link {

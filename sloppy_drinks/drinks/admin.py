@@ -16,7 +16,7 @@ class DrinkAdmin(admin.ModelAdmin):
     ordering = ['name']
 
 class EpisodeAdmin(admin.ModelAdmin):
-    list_display = ['number', 'title', 'date', 'drink', 'apple_podcasts_url', 'spotify_url', 'instagram_post_url', 'x_post_url']
+    list_display = ['number', 'title', 'date', 'drink', 'apple_podcasts_url', 'spotify_url', 'youtube_url', 'instagram_post_url', 'x_post_url']
     ordering = ['number']
 
 class ImageSourceAdmin(admin.ModelAdmin):
