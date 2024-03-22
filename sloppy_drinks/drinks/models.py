@@ -35,6 +35,7 @@ class Episode(models.Model):
     date = models.DateField(unique=True)
     apple_podcasts_url = models.URLField(max_length=200, default='https://podcasts.apple.com/us/podcast/the-sloppy-boys/id1537187838')
     spotify_url = models.URLField(max_length=200, default='https://open.spotify.com/show/3qFjDCQ16YrjFw5ufNpV3c')
+    youtube_url = models.URLField(max_length=200, blank=True, default='')
     instagram_post_url = models.URLField(max_length=200, blank=True, null=True)
     x_post_url = models.URLField(max_length=200, blank=True, null=True)
 
