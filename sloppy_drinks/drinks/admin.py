@@ -7,7 +7,7 @@ class IngredientAdmin(admin.ModelAdmin):
     ordering = ['name']
 
 class RecipeSourceAdmin(admin.ModelAdmin):
-    pass
+    ordering = ['name']
 
 class DrinkAdmin(admin.ModelAdmin):
     list_display = ['name', 'slug', 'recipe_url', 'recipe_source']
