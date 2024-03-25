@@ -14,8 +14,9 @@ nav {
 .navbar-brand, .navbar-brand:hover {
     color: #ffffff;
     text-decoration: none;
-    font-family: "Rock Salt", cursive;
-    font-weight: 400;
+    font-family: "Grandstander", cursive;
+    font-optical-sizing: auto;
+    font-weight: 800;
     font-style: normal;
 }
   
