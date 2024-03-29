@@ -33,9 +33,9 @@ nav .collapse {
     border-radius: 1%;
 }
 
-#drinks .card:hover {
+/*#drinks .card:hover {
     transform: scale(1.03);
-}
+}*/
 
 footer {
     background-color: #37B5B6;
