@@ -7,7 +7,7 @@ from drinks.models import Drink, Image, Episode
 def drink_index(request):
     page_num = request.GET.get('page', 1)
     images = Image.objects.filter(recipe=True).distinct().order_by('drink__name')
-    page = Paginator(object_list=images, per_page=6).get_page(page_num)
+    page = Paginator(object_list=images, per_page=15).get_page(page_num)
 
     return render(
         request=request,
