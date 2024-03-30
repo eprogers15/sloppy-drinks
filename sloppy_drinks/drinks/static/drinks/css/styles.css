@@ -15,10 +15,21 @@ nav {
     font-weight: 800;
     font-style: normal;
 }
-  
 
 nav .collapse {
     color: #363636;
+}
+
+.email-icon-link {
+    color: black;
+    text-decoration: none;
+    padding-right: 10px;
+}
+
+.linkedin-icon-link {
+    color: black;
+    text-decoration: none;
+    padding-right: 10px;
 }
 
 .search_bar {
@@ -82,4 +93,5 @@ footer {
 .x-icon-link {
     color: black;
     text-decoration: none;
+    padding-right: 10px;
 }

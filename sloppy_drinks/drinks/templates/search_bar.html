@@ -6,7 +6,7 @@
             <div class="search">
                 <div class="input-group">
                     <input type="text" class="form-control" id="search-bar" aria-label="Text input with dropdown button"
-                        name="q" placeholder="Search" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                        name="q" placeholder="Search by name or ingredient" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                         hx-trigger="input delay:0.2s" hx-vals='{"sort": "alpha-asc"}'>
                     <button class="btn btn-outline-light dropdown-toggle" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" value="alpha-asc" name="sort"
