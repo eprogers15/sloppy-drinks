@@ -76,7 +76,8 @@
             <form class="card-body tab-content">
                 {% if drink.recipe_source %}
                 <div class="tab-pane active" id="recipe">
-                    <p class="card-text">Source: {{ drink.recipe_source.name }} {% if drink.recipe_url %}(<a class="recipe-link" href="{{ drink.recipe_url }}" target="_blank">Link</a>){% endif %}</p>
+                    <p class="card-text">Source: {{ drink.recipe_source.name }} {% if drink.recipe_url %}(<a
+                            class="recipe-link" href="{{ drink.recipe_url }}" target="_blank">Link</a>){% endif %}</p>
                 </div>
                 <div class="tab-pane" id="episode">
                     <ul class="list-group list-group-flush">
@@ -176,6 +177,14 @@
                 </div>
             </form>
         </div>
+        <div>
+            {% if similar_drinks %}
+                {% for similar_drink in similar_drinks %}
+                <p>{{ similar_drink.filename }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+
     </div>
 </div>
 {% endblock page_content %}

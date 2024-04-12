@@ -26,6 +26,24 @@ class Drink(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+    
+    def get_similar_drinks(self):
+        unique_similar_drinks = set()
+        total_similar_drinks = []
+        for ingredient in self.ingredients.all():
+            ingredient_drinks = ingredient.drink_set.all()
+            unique_similar_drinks.update(ingredient_drinks)
+            total_similar_drinks.extend(ingredient_drinks)
+        unique_similar_drinks.remove(self)
+        similar_drinks_dict = {}
+        for unique_drink in unique_similar_drinks:
+            common_ingredients_count = total_similar_drinks.count(unique_drink)
+            commonality_score = common_ingredients_count * (common_ingredients_count / len(unique_drink.ingredients.all()))
+            if commonality_score > 0.5:
+                similar_drinks_dict[unique_drink] = commonality_score
+        sorted_similar_drinks_dict = sorted(similar_drinks_dict.items(), key=lambda x: x[1], reverse=True)
+        similar_drinks = [item[0] for item in sorted_similar_drinks_dict[:3]]
+        return similar_drinks
 
 class Episode(models.Model):
     """Model representing an Episode"""

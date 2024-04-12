@@ -75,10 +75,12 @@ def drink_detail(request, slug):
     recipe_image = Image.objects.filter(drink=drink, recipe=True)[0]
     non_recipe_images = Image.objects.filter(drink=drink, recipe=False)
     episodes = Episode.objects.filter(drink=drink)
+    similar_drinks = Image.objects.filter(drink__in=drink.get_similar_drinks())
     context = {
         "drink": drink,
         "recipe_image": recipe_image,
         "non_recipe_images": non_recipe_images,
         "episodes": episodes,
+        "similar_drinks": similar_drinks,
     }
     return render(request, "drink_detail.html", context)
