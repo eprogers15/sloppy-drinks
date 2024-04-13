@@ -177,14 +177,23 @@
                 </div>
             </form>
         </div>
-        <div>
-            {% if similar_drinks %}
-                {% for similar_drink in similar_drinks %}
-                <p>{{ similar_drink.filename }}</p>
-                {% endfor %}
-            {% endif %}
+        {% if similar_drinks %}
+        <div class="container px-4 py-5" id="custom-cards">
+            <h2 class="pb-2 border-bottom">Similar Drinks</h2>
+            <div class="row row-cols-3 g-0" id="drinks">
+                    {% for similar_drink in similar_drinks %}
+                    <div class="col drink">
+                        <div class="card shadow-sm">
+                            <a href="{% url 'drink_detail' similar_drink.drink.slug %}">
+                                <img class="card-img-top" src="{% static 'drinks/images/'|add:similar_drink.filename %}"
+                                    alt="{{ similar_drink.drink.name }}">
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+            </div>
         </div>
-
+        {% endif %}
     </div>
 </div>
 {% endblock page_content %}
