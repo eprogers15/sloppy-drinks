@@ -30,12 +30,15 @@ class Drink(models.Model):
     def get_similar_drinks(self):
         total_similar_drinks = Drink.objects.filter(ingredients__in=self.ingredients.all()).exclude(name=self.name)
         unique_similar_drinks = total_similar_drinks.distinct()
+        drink_ingredients = set(self.ingredients.all())
         similar_drinks_dict = {}
         for unique_drink in unique_similar_drinks:
-            common_ingredients_count = total_similar_drinks.filter(name=unique_drink.name).count()
-            commonality_score = common_ingredients_count * (common_ingredients_count / len(unique_drink.ingredients.all()))
-            if commonality_score > 0.5:
-                similar_drinks_dict[unique_drink] = commonality_score
+            unique_drink_ingredients = set(unique_drink.ingredients.all())
+            intersection = len(drink_ingredients.intersection(unique_drink_ingredients))
+            union = len(drink_ingredients.union(unique_drink_ingredients))
+            similarity_score = intersection / union
+            if similarity_score > 0.25:
+                similar_drinks_dict[unique_drink] = similarity_score
         sorted_similar_drinks_dict = sorted(similar_drinks_dict.items(), key=lambda x: x[1], reverse=True)
         similar_drinks = [item[0] for item in sorted_similar_drinks_dict[:3]]
         return similar_drinks
