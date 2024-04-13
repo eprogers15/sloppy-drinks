@@ -28,16 +28,11 @@ class Drink(models.Model):
         return f"{self.name}"
     
     def get_similar_drinks(self):
-        unique_similar_drinks = set()
-        total_similar_drinks = []
-        for ingredient in self.ingredients.all():
-            ingredient_drinks = ingredient.drink_set.all()
-            unique_similar_drinks.update(ingredient_drinks)
-            total_similar_drinks.extend(ingredient_drinks)
-        unique_similar_drinks.remove(self)
+        unique_similar_drinks = Drink.objects.filter(ingredients__in=self.ingredients.all()).exclude(name=self.name).distinct()
+        total_similar_drinks = Drink.objects.filter(ingredients__in=self.ingredients.all()).exclude(name=self.name)
         similar_drinks_dict = {}
         for unique_drink in unique_similar_drinks:
-            common_ingredients_count = total_similar_drinks.count(unique_drink)
+            common_ingredients_count = total_similar_drinks.filter(name=unique_drink.name).count()
             commonality_score = common_ingredients_count * (common_ingredients_count / len(unique_drink.ingredients.all()))
             if commonality_score > 0.5:
                 similar_drinks_dict[unique_drink] = commonality_score
