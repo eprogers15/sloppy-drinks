@@ -28,8 +28,8 @@ class Drink(models.Model):
         return f"{self.name}"
     
     def get_similar_drinks(self):
-        unique_similar_drinks = Drink.objects.filter(ingredients__in=self.ingredients.all()).exclude(name=self.name).distinct()
         total_similar_drinks = Drink.objects.filter(ingredients__in=self.ingredients.all()).exclude(name=self.name)
+        unique_similar_drinks = total_similar_drinks.distinct()
         similar_drinks_dict = {}
         for unique_drink in unique_similar_drinks:
             common_ingredients_count = total_similar_drinks.filter(name=unique_drink.name).count()
