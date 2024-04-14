@@ -43,7 +43,6 @@
                 alt="{{ recipe_image.drink.name }}">
             {% endif %}
             <div class="card-header">
-                <h5 class="card-title">Links</h5>
                 <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
                     {% if drink.recipe_source %}
                     <li class="nav-item">
@@ -178,8 +177,8 @@
             </form>
         </div>
         {% if similar_drinks %}
-        <div class="container px-4 py-5" id="custom-cards">
-            <h2 class="pb-2 border-bottom">Similar Drinks</h2>
+        <div class="container px-0 py-3" id="similar-drinks-container">
+            <h2 class="pb-2 border-bottom similar-drinks-heading">Drinks similar to the <span style="color:#363636;">{{ drink.name }}</span></h2>
             <div class="row row-cols-3 g-0" id="drinks">
                     {% for similar_drink in similar_drinks %}
                     <div class="col drink">

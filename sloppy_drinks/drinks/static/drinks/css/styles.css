@@ -26,13 +26,13 @@ nav .collapse {
 }
 
 .email-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
 
 .linkedin-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
@@ -67,36 +67,41 @@ footer {
 }
 
 .nav-link, .nav-link:hover {
-    color: black;
+    color: #363636;
     text-decoration: none;
 }
 
 .spotify-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
 
 .apple-podcasts-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
 
 .youtube-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
 
 .instagram-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
 
 .x-icon-link {
-    color: black;
+    color: #363636;
     text-decoration: none;
     padding-right: 10px;
+}
+
+.similar-drinks-heading {
+    color: #898B8A;
+    font-size: 20px;
 }
