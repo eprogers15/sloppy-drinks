@@ -60,7 +60,7 @@ def drink_index_partial(request):
         else:
             images = Image.objects.filter(recipe=True).order_by('drink__name')
         
-        page = Paginator(object_list=images, per_page=6).get_page(page_num)
+        page = Paginator(object_list=images, per_page=15).get_page(page_num)
 
         return render(
             request=request,
