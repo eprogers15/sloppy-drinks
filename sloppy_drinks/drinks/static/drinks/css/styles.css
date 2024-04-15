@@ -21,6 +21,10 @@ nav {
     font-style: normal;
 }
 
+.navbar-toggler {
+    border-color: #ffffff;
+}
+
 nav .collapse {
     color: #363636;
 }
