@@ -33,34 +33,6 @@ nav .collapse {
     color: #363636;
 }
 
-.email-icon-link {
-    color: #363636;
-    text-decoration: none;
-    padding-right: 10px;
-}
-
-.bi-envelope-fill {
-    transition: all 0.3s;
-}
-
-.email-icon-link:hover .bi-envelope-fill {
-    transform: scale(1.2);
-}
-
-.linkedin-icon-link {
-    color: #363636;
-    text-decoration: none;
-    padding-right: 10px;
-}
-
-.bi-linkedin {
-    transition: all 0.3s;
-}
-
-.linkedin-icon-link:hover .bi-linkedin {
-    transform: scale(1.2);
-}
-
 .search_bar {
     background-color: #363636;
 }
@@ -96,73 +68,17 @@ footer {
     text-decoration: none;
 }
 
-.spotify-icon-link {
+.svg-icon-link {
     color: #363636;
     text-decoration: none;
     padding-right: 10px;
 }
 
-.bi-spotify {
+.svg-icon {
     transition: all 0.3s;
 }
 
-.spotify-icon-link:hover .bi-spotify {
-    transform: scale(1.2);
-}
-
-.apple-podcasts-icon-link {
-    color: #363636;
-    text-decoration: none;
-    padding-right: 10px;
-}
-
-.bi-broadcast-pin {
-    transition: all 0.3s;
-}
-
-.apple-podcasts-icon-link:hover .bi-broadcast-pin {
-    transform: scale(1.2);
-}
-
-.youtube-icon-link {
-    color: #363636;
-    text-decoration: none;
-    padding-right: 10px;
-}
-
-.bi-youtube {
-    transition: all 0.3s;
-}
-
-.youtube-icon-link:hover .bi-youtube {
-    transform: scale(1.2);
-}
-
-.instagram-icon-link {
-    color: #363636;
-    text-decoration: none;
-    padding-right: 10px;
-}
-
-.bi-instagram {
-    transition: all 0.3s;
-}
-
-.instagram-icon-link:hover .bi-instagram {
-    transform: scale(1.2);
-}
-
-.x-icon-link {
-    color: #363636;
-    text-decoration: none;
-    padding-right: 10px;
-}
-
-.bi-twitter-x {
-    transition: all 0.3s;
-}
-
-.x-icon-link:hover .bi-twitter-x {
+.svg-icon-link:hover .svg-icon {
     transform: scale(1.2);
 }
 
