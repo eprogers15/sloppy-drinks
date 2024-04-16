@@ -65,13 +65,13 @@ nav .collapse {
     background-color: #363636;
 }
 
-.card {
+.card-img-top {
     border-radius: 1%;
     opacity: 1;
     transition: opacity 0.3s;
 }
 
-#drinks .card:hover {
+#drinks .card-img-top:hover {
     opacity: 0.9;
 }
 
