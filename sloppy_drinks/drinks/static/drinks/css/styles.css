@@ -55,11 +55,13 @@ nav .collapse {
 
 .card-img-top {
     border-radius: 1%;
+    opacity: 1; /* 1 is fully opaque, 0 is fully transparent */
+    transition: opacity 0.3s ease; /* Add transition for smooth effect */
 }
 
-/*#drinks .card:hover {
-    transform: scale(1.03);
-}*/
+#drinks .card-img-top:hover {
+    opacity: 0.9; /* Adjust the opacity value as needed */
+}
 
 footer {
     background-color: #37B5B6;
