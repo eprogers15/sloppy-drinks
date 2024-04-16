@@ -67,11 +67,14 @@ nav .collapse {
 
 .card-img-top {
     border-radius: 1%;
+}
+
+.card {
     opacity: 1;
     transition: opacity 0.3s;
 }
 
-#drinks .card-img-top:hover {
+#drinks .card:hover {
     opacity: 0.9;
 }
 
