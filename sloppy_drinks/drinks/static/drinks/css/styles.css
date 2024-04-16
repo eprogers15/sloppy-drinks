@@ -39,6 +39,10 @@ nav .collapse {
     padding-right: 10px;
 }
 
+.bi-envelope-fill {
+    transition: all 0.3s;
+}
+
 .email-icon-link:hover .bi-envelope-fill {
     transform: scale(1.2);
 }
@@ -47,6 +51,10 @@ nav .collapse {
     color: #363636;
     text-decoration: none;
     padding-right: 10px;
+}
+
+.bi-linkedin {
+    transition: all 0.3s;
 }
 
 .linkedin-icon-link:hover .bi-linkedin {
@@ -58,13 +66,9 @@ nav .collapse {
 }
 
 .card {
-    transition: all 0.3s;
-}
-
-.card {
     border-radius: 1%;
     opacity: 1;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s;
 }
 
 #drinks .card:hover {
@@ -95,6 +99,10 @@ footer {
     padding-right: 10px;
 }
 
+.bi-spotify {
+    transition: all 0.3s;
+}
+
 .spotify-icon-link:hover .bi-spotify {
     transform: scale(1.2);
 }
@@ -103,6 +111,10 @@ footer {
     color: #363636;
     text-decoration: none;
     padding-right: 10px;
+}
+
+.bi-broadcast-pin {
+    transition: all 0.3s;
 }
 
 .apple-podcasts-icon-link:hover .bi-broadcast-pin {
@@ -115,6 +127,10 @@ footer {
     padding-right: 10px;
 }
 
+.bi-youtube {
+    transition: all 0.3s;
+}
+
 .youtube-icon-link:hover .bi-youtube {
     transform: scale(1.2);
 }
@@ -125,6 +141,10 @@ footer {
     padding-right: 10px;
 }
 
+.bi-instagram {
+    transition: all 0.3s;
+}
+
 .instagram-icon-link:hover .bi-instagram {
     transform: scale(1.2);
 }
@@ -133,6 +153,10 @@ footer {
     color: #363636;
     text-decoration: none;
     padding-right: 10px;
+}
+
+.bi-twitter-x {
+    transition: all 0.3s;
 }
 
 .x-icon-link:hover .bi-twitter-x {
