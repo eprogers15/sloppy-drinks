@@ -1,13 +1,12 @@
-from django.db.models import Q
+from django.db.models import Q, Prefetch, Min
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from drinks.models import Drink, Image, Episode
 
-# Create your views here.
 def drink_index(request):
+    drinks = Drink.objects.all().prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by('name')
     page_num = request.GET.get('page', 1)
-    images = Image.objects.filter(recipe=True).distinct().order_by('drink__name')
-    page = Paginator(object_list=images, per_page=15).get_page(page_num)
+    page = Paginator(object_list=drinks, per_page=15).get_page(page_num)
 
     return render(
         request=request,
@@ -18,63 +17,30 @@ def drink_index(request):
     )
 
 def drink_index_partial(request):
-    if request.htmx:
-        search = request.GET.get('q')
-        sort = request.GET.get('sort')
-        page_num = request.GET.get('page', 1)
+    search = request.GET.get('q')
+    sort = request.GET.get('sort')
+    page_num = request.GET.get('page', 1)
 
-        if sort == 'alpha-asc':
-            if search:
-                images = Image.objects.filter((Q(drink__name__icontains=search) | Q(drink__ingredients__name__icontains=search)) & Q(recipe=True)).distinct().order_by('drink__name')
-            else:
-                images = Image.objects.filter(recipe=True).order_by('drink__name')
-        elif sort == 'alpha-desc':
-            if search:
-                images = Image.objects.filter((Q(drink__name__icontains=search) | Q(drink__ingredients__name__icontains=search)) & Q(recipe=True)).distinct().order_by('-drink__name')
-            else:
-                images = Image.objects.filter(recipe=True).order_by('-drink__name')
-        elif sort == 'chron-asc':
-            if search:
-                episodes = Episode.objects.filter((Q(drink__name__icontains=search) | Q(drink__ingredients__name__icontains=search))).order_by('number')
-            else:
-                episodes = Episode.objects.all().order_by('number')
-            drinks = []
-            for episode in episodes:
-                if episode.drink not in drinks:
-                    drinks.append(episode.drink)
-            images = []
-            for drink in drinks:
-                images.append(drink.image_set.get(recipe=True))
-        elif sort == 'chron-desc':
-            if search:
-                episodes = Episode.objects.filter((Q(drink__name__icontains=search) | Q(drink__ingredients__name__icontains=search))).order_by('-number')
-            else:
-                episodes = Episode.objects.all().order_by('-number')
-            drinks = []
-            for episode in episodes:
-                if episode.drink not in drinks:
-                    drinks.append(episode.drink)
-            images = []
-            for drink in drinks:
-                images.append(drink.image_set.get(recipe=True))
-        else:
-            images = Image.objects.filter(recipe=True).order_by('drink__name')
+    if search:
+        drinks = Drink.objects.filter(Q(name__icontains=search) | Q(ingredients__name__icontains=search)).prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by(sort)
+    else:
+        drinks = Drink.objects.all().prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by(sort)
         
-        page = Paginator(object_list=images, per_page=15).get_page(page_num)
+    page = Paginator(object_list=drinks, per_page=15).get_page(page_num)
 
-        return render(
-            request=request,
-            template_name='drink_index_partial.html',
-            context={
-                'page': page
-            }
-        )
+    return render(
+        request=request,
+        template_name='drink_index_partial.html',
+        context={
+            'page': page
+        }
+    )
 
 def drink_detail(request, slug):
-    drink = Drink.objects.get(slug=slug)
-    recipe_image = Image.objects.filter(drink=drink, recipe=True)[0]
-    non_recipe_images = Image.objects.filter(drink=drink, recipe=False)
-    episodes = Episode.objects.filter(drink=drink)
+    drink = Drink.objects.prefetch_related('episode_set', 'image_set').get(slug=slug)
+    recipe_image = drink.image_set.filter(recipe=True)[0]
+    non_recipe_images = drink.image_set.filter(recipe=False).order_by('filename')
+    episodes = drink.episode_set.all().order_by('number')
     similar_drinks = Image.objects.filter(drink__in=drink.get_similar_drinks())
     context = {
         "drink": drink,

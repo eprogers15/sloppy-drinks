@@ -3,12 +3,12 @@
 <div class="container">
     <!--<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="drinks">-->
     <div class="row row-cols-3 g-0" id="drinks">
-        {% for image in page.object_list %}
+        {% for drink in page.object_list %}
         <div class="col drink">
             <div class="card shadow-sm">
-                <a href="{% url 'drink_detail' image.drink.slug %}">
-                    <img class="card-img-top" src="{% static 'drinks/images/'|add:image.filename %}"
-                        alt="{{ image.drink.name }}">
+                <a href="{% url 'drink_detail' drink.slug %}">
+                    <img class="card-img-top" src="{% static 'drinks/images/'|add:drink.image_filename %}"
+                        alt="{{ drink.name }}">
                 </a>
             </div>
             {% if page.has_next and forloop.last %}
