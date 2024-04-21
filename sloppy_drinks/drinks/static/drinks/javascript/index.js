@@ -21,6 +21,7 @@ $(".dropdown-sort-item").click(function() {
   $(".active").removeClass("active");
   $(this).addClass("active");
   $("#search-bar").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
+  $("#filter-button").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
 });
 
 function getSortOrder() {

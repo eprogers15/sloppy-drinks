@@ -13,7 +13,8 @@
                     <button class="btn btn-outline-light dropdown-toggle btn-block" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" value="name" name="sort"
                         hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
-                        hx-trigger="click from:.dropdown-item delay:0.2s" hx-include="#search-bar">Sort by: A-Z</button>
+                        hx-trigger="click from:.dropdown-sort-item delay:0.2s" hx-include="#search-bar">Sort by:
+                        A-Z</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item dropdown-sort-item active" value="name">A-Z</a></li>
                         <li><a class="dropdown-item dropdown-sort-item" value="-name">Z-A</a></li>
@@ -23,7 +24,8 @@
                 </div>
                 <div class="dropdown col py-3">
                     <button class="btn btn-outline-light dropdown-toggle btn-block" id="filter-button" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" name="filter">Ingredient Filter</button>
+                        data-bs-toggle="dropdown" aria-expanded="false" name="filter" hx-get="{% url 'drink_index_partial' %}"
+                        hx-target="#results" hx-trigger="change from:.dropdown-filter-item delay:0.2s" hx-vals='{"sort": "name"}'>Ingredient Filter</button>
                     <ul class="dropdown-menu ingredients-dropdown-list">
                         {% for ingredient in ingredients %}
                         <div class="dropdown-item dropdown-filter-item">
