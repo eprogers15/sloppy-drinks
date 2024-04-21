@@ -37,6 +37,11 @@ nav .collapse {
     background-color: #363636;
 }
 
+.ingredients-dropdown-list {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
 .card-img-top {
     border-radius: 1%;
 }

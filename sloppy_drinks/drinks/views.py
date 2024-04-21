@@ -1,10 +1,11 @@
 from django.db.models import Q, Prefetch, Min
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from drinks.models import Drink, Image, Episode
+from drinks.models import Drink, Ingredient, Image, Episode
 
 def drink_index(request):
     drinks = Drink.objects.all().prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by('name')
+    ingredients = Ingredient.objects.all().order_by('name')
     page_num = request.GET.get('page', 1)
     page = Paginator(object_list=drinks, per_page=15).get_page(page_num)
 
@@ -12,7 +13,8 @@ def drink_index(request):
         request=request,
         template_name='drink_index.html',
         context={
-            'page': page
+            'page': page,
+            'ingredients': ingredients,
         }
     )
 
@@ -28,11 +30,14 @@ def drink_index_partial(request):
         
     page = Paginator(object_list=drinks, per_page=15).get_page(page_num)
 
+    ingredients = Ingredient.objects.all().order_by('name')
+
     return render(
         request=request,
         template_name='drink_index_partial.html',
         context={
-            'page': page
+            'page': page,
+            'ingredients': ingredients,
         }
     )
 

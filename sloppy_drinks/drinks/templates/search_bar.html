@@ -2,21 +2,35 @@
 
 <div class="container-fluid shadow-sm search_bar">
     <div class="row justify-content-center">
-        <div class="col-md-8 py-3">
-            <div class="search">
-                <div class="input-group">
+        <div class="col-md-8 center-column">
+            <div class="row">
+                <form class="form-inline col-lg-6 pt-3">
                     <input type="text" class="form-control" id="search-bar" aria-label="Text input with dropdown button"
-                        name="q" placeholder="Search by name or ingredient" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
-                        hx-trigger="input delay:0.2s" hx-vals='{"sort": "name"}'>
-                    <button class="btn btn-outline-light dropdown-toggle" id="sort-button" type="button"
+                        name="q" placeholder="Search by name or ingredient" hx-get="{% url 'drink_index_partial' %}"
+                        hx-target="#results" hx-trigger="input delay:0.2s" hx-vals='{"sort": "name"}'>
+                </form>
+                <div class="dropdown col py-3">
+                    <button class="btn btn-outline-light dropdown-toggle btn-block" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" value="name" name="sort"
                         hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
-                        hx-trigger="click from:.dropdown-item delay:0.2s" hx-include="#search-bar">Sort by:</button>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item active" value="name">A-Z</a></li>
-                        <li><a class="dropdown-item" value="-name">Z-A</a></li>
-                        <li><a class="dropdown-item" value="-episode_number">New-Old</a></li>
-                        <li><a class="dropdown-item" value="episode_number">Old-New</a></li>
+                        hx-trigger="click from:.dropdown-item delay:0.2s" hx-include="#search-bar">Sort by: A-Z</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item dropdown-sort-item active" value="name">A-Z</a></li>
+                        <li><a class="dropdown-item dropdown-sort-item" value="-name">Z-A</a></li>
+                        <li><a class="dropdown-item dropdown-sort-item" value="-episode_number">New-Old</a></li>
+                        <li><a class="dropdown-item dropdown-sort-item" value="episode_number">Old-New</a></li>
+                    </ul>
+                </div>
+                <div class="dropdown col py-3">
+                    <button class="btn btn-outline-light dropdown-toggle btn-block" id="filter-button" type="button"
+                        data-bs-toggle="dropdown" aria-expanded="false" name="filter">Ingredient Filter</button>
+                    <ul class="dropdown-menu ingredients-dropdown-list">
+                        {% for ingredient in ingredients %}
+                        <div class="dropdown-item dropdown-filter-item">
+                            <input type="checkbox" id="{{ ingredient.name }}" name="{{ ingredient.name }}">
+                            <label for="{{ ingredient.name }}">{{ ingredient.name }}</label>
+                        </div>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>

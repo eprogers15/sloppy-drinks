@@ -14,9 +14,10 @@ $(window).resize(function () {
   }, 500);
 });
 
-$(".dropdown-item").click(function() {
+$(".dropdown-sort-item").click(function() {
   let new_sort_order = this.attributes.value.value;
   $("#sort-button").attr("value", new_sort_order);
+  $("#sort-button").text("Sort by: " + this.innerText);
   $(".active").removeClass("active");
   $(this).addClass("active");
   $("#search-bar").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
