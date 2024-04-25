@@ -20,11 +20,6 @@ $(".dropdown-sort-item").click(function() {
   $("#sort-button").text("Sort by: " + this.innerText);
   $(".active").removeClass("active");
   $(this).addClass("active");
-  $("#search-bar").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
+  $("#sort-hidden").attr("value", new_sort_order);
   $("#filter-button").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
 });
-
-function getSortOrder() {
-  let sort_order = $("#sort-button").attr("value");
-  return sort_order;
-};

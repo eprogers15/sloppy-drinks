@@ -13,7 +13,7 @@
             </div>
             {% if page.has_next and forloop.last %}
             <span id="infinite-scroll-container" hx-get="{% url 'drink_index_partial' %}?page={{ page.next_page_number }}" hx-swap="beforeend"
-                hx-target="#drinks" hx-select=".drink" hx-trigger="revealed" hx-include="#search-bar" hx-vals='js:{sort: getSortOrder()}'>
+                hx-target="#drinks" hx-select=".drink" hx-trigger="revealed" hx-include="#search-bar, #sort-hidden">
             </span>
             {% endif %}
         </div>
