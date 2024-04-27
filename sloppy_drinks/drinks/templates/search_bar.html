@@ -7,14 +7,13 @@
                 <form class="form-inline col-lg-6 pt-3">
                     <input type="text" class="form-control" id="search-bar" aria-label="Text input with dropdown button"
                         name="q" placeholder="Search by name or ingredient" hx-get="{% url 'drink_index_partial' %}"
-                        hx-target="#results" hx-trigger="input delay:0.2s" hx-include="[name='sort']">
-                    <input type="hidden" id="sort-hidden" name="sort" value="name">
+                        hx-target="#results" hx-trigger="input delay:0.2s" hx-include="#sort-hidden, #filter-hidden">
                 </form>
                 <div class="dropdown col py-3">
                     <button class="btn btn-outline-light dropdown-toggle btn-block" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="click from:.dropdown-sort-item delay:0.2s"
-                        hx-include="#search-bar, #sort-hidden">Sort by:
+                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort by:
                         A-Z</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item dropdown-sort-item active" value="name">A-Z</a></li>
@@ -22,21 +21,22 @@
                         <li><a class="dropdown-item dropdown-sort-item" value="-episode_number">New-Old</a></li>
                         <li><a class="dropdown-item dropdown-sort-item" value="episode_number">Old-New</a></li>
                     </ul>
+                    <input type="hidden" id="sort-hidden" name="sort" value="name">
                 </div>
                 <div class="dropdown col py-3">
                     <button class="btn btn-outline-light dropdown-toggle btn-block" id="filter-button" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" name="filter"
-                        hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
-                        hx-trigger="change from:.dropdown-filter-item delay:0.2s" hx-vals='{"sort": "name"}'>Ingredient
+                        data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
+                        hx-target="#results" hx-trigger="change from:.dropdown-filter-item delay:0.2s" hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredient
                         Filter</button>
                     <ul class="dropdown-menu ingredients-dropdown-list">
                         {% for ingredient in ingredients %}
                         <div class="dropdown-item dropdown-filter-item">
-                            <input type="checkbox" id="{{ ingredient.name }}" name="{{ ingredient.name }}">
+                            <input type="checkbox" class="dropdown-filter-checkbox" id="{{ ingredient.name }}" name="dropdown-filter-checkbox">
                             <label for="{{ ingredient.name }}">{{ ingredient.name }}</label>
                         </div>
                         {% endfor %}
                     </ul>
+                    <input type="hidden" id="filter-hidden" name="filter">
                 </div>
             </div>
         </div>

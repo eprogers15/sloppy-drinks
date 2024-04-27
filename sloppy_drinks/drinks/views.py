@@ -1,4 +1,4 @@
-from django.db.models import Q, Prefetch, Min
+from django.db.models import Q, Prefetch, Min, Count
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from drinks.models import Drink, Ingredient, Image, Episode
@@ -21,10 +21,13 @@ def drink_index(request):
 def drink_index_partial(request):
     search = request.GET.get('q')
     sort = request.GET.get('sort')
+    filter = request.GET.get('filter').split(",")
     page_num = request.GET.get('page', 1)
 
-    if search:
+    if search and not filter:
         drinks = Drink.objects.filter(Q(name__icontains=search) | Q(ingredients__name__icontains=search)).prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by(sort)
+    elif filter and not search:
+        drinks = Drink.objects.filter(ingredients__in=filter).annotate(filter_count=Count('ingredients')).filter(filter_count=len(filter)).prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by(sort)
     else:
         drinks = Drink.objects.all().prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="image_filename")).annotate(episode_number=Min('episode__number'), image_filename=Min('image__filename')).order_by(sort)
         

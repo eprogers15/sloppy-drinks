@@ -14,7 +14,7 @@ $(window).resize(function () {
   }, 500);
 });
 
-$(".dropdown-sort-item").click(function() {
+$(".dropdown-sort-item").click(function () {
   let new_sort_order = this.attributes.value.value;
   $("#sort-button").attr("value", new_sort_order);
   $("#sort-button").text("Sort by: " + this.innerText);
@@ -22,4 +22,12 @@ $(".dropdown-sort-item").click(function() {
   $(this).addClass("active");
   $("#sort-hidden").attr("value", new_sort_order);
   $("#filter-button").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
+});
+
+$(".dropdown-filter-checkbox").change(function () {
+  checkedValues = [];
+  $(".dropdown-filter-checkbox:checked").each(function () {
+    checkedValues.push($(this).attr("id"));
+  });
+  $("#filter-hidden").attr("value", checkedValues);
 });
