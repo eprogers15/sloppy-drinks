@@ -14,6 +14,12 @@ $(window).resize(function () {
   }, 500);
 });
 
+$(function () {
+  $("#search-bar-form").submit(function () {
+    return false;
+  });
+});
+
 $(".dropdown-sort-item").click(function () {
   let new_sort_order = this.attributes.value.value;
   $("#sort-button").attr("value", new_sort_order);
@@ -32,8 +38,7 @@ $(".dropdown-filter-checkbox").change(function () {
   let checkedValuesLength = checkedValues.length;
   if (checkedValuesLength > 0) {
     $("#filter-button").text("Ingredients (" + checkedValuesLength + ")");
-  }
-  else {
+  } else {
     $("#filter-button").text("Ingredients");
   }
 });

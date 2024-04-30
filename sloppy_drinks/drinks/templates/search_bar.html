@@ -4,7 +4,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8 center-column">
             <div class="row">
-                <form class="form-inline col-lg-5 pt-3">
+                <form class="form-inline col-lg-5 pt-3" id="search-bar-form">
                     <input type="text" class="form-control" id="search-bar" aria-label="Text input with dropdown button"
                         name="q" placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="input delay:0.2s" hx-include="#sort-hidden, #filter-hidden">
