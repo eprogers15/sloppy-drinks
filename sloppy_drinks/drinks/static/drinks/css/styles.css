@@ -72,6 +72,10 @@ nav .collapse {
     opacity: 0.9;
 }
 
+.no-match-text {
+    color: #363636;
+}
+
 footer {
     background-color: #37B5B6;
 }

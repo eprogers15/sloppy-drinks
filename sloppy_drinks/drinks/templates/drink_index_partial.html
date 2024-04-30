@@ -3,20 +3,28 @@
 <div class="container">
     <!--<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="drinks">-->
     <div class="row row-cols-3 g-0" id="drinks">
-        {% for drink in page.object_list %}
-        <div class="col drink">
-            <div class="card shadow-sm">
-                <a href="{% url 'drink_detail' drink.slug %}">
-                    <img class="card-img-top" src="{% static 'drinks/images/'|add:drink.recipe_image.0.filename %}"
-                        alt="{{ drink.name }}">
-                </a>
+        {% if page.object_list|length > 0 %}
+            {% for drink in page.object_list %}
+            <div class="col drink">
+                <div class="card shadow-sm">
+                    <a href="{% url 'drink_detail' drink.slug %}">
+                        <img class="card-img-top" src="{% static 'drinks/images/'|add:drink.recipe_image.0.filename %}"
+                            alt="{{ drink.name }}">
+                    </a>
+                </div>
+                {% if page.has_next and forloop.last %}
+                <span id="infinite-scroll-container"
+                    hx-get="{% url 'drink_index_partial' %}?page={{ page.next_page_number }}" hx-swap="beforeend"
+                    hx-target="#drinks" hx-select=".drink" hx-trigger="revealed"
+                    hx-include="#search-bar, #sort-hidden, #filter-hidden">
+                </span>
+                {% endif %}
             </div>
-            {% if page.has_next and forloop.last %}
-            <span id="infinite-scroll-container" hx-get="{% url 'drink_index_partial' %}?page={{ page.next_page_number }}" hx-swap="beforeend"
-                hx-target="#drinks" hx-select=".drink" hx-trigger="revealed" hx-include="#search-bar, #sort-hidden, #filter-hidden">
-            </span>
-            {% endif %}
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <div></div>
+            <h2 class="no-match-text w-100">No drinks match your search. Try again.</h2>
+            <div></div>
+        {% endif %}
     </div>
 </div>
