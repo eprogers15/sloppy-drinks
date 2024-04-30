@@ -6,21 +6,20 @@
             <div class="row">
                 <form class="form-inline col-lg-5 pt-3">
                     <input type="text" class="form-control" id="search-bar" aria-label="Text input with dropdown button"
-                        name="q" placeholder="Search by name or ingredient" hx-get="{% url 'drink_index_partial' %}"
+                        name="q" placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="input delay:0.2s" hx-include="#sort-hidden, #filter-hidden">
                 </form>
                 <div class="dropdown col py-3 text-center">
                     <button class="btn btn-outline-light dropdown-toggle w-100" id="filter-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="change from:.dropdown-filter-item delay:0.2s"
-                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients
-                        Filter</button>
+                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
                     <ul class="dropdown-menu ingredients-dropdown-list">
-                        {% for ingredient in ingredients %}
+                        {% for filter_ingredient in filter_ingredients %}
                         <div class="dropdown-item dropdown-filter-item">
-                            <input type="checkbox" class="dropdown-filter-checkbox" id="{{ ingredient.name }}"
+                            <input type="checkbox" class="dropdown-filter-checkbox" id="{{ filter_ingredient.name }}"
                                 name="dropdown-filter-checkbox">
-                            <label for="{{ ingredient.name }}">{{ ingredient.name }}</label>
+                            <label for="{{ filter_ingredient.name }}">{{ filter_ingredient.name }}</label>
                         </div>
                         {% endfor %}
                     </ul>
@@ -30,7 +29,7 @@
                     <button class="btn btn-outline-light dropdown-toggle w-100" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="click from:.dropdown-sort-item delay:0.2s"
-                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort by:
+                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
                         A-Z</button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item dropdown-sort-item active" value="name">A-Z</a></li>

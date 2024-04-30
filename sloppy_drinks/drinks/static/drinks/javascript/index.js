@@ -17,7 +17,7 @@ $(window).resize(function () {
 $(".dropdown-sort-item").click(function () {
   let new_sort_order = this.attributes.value.value;
   $("#sort-button").attr("value", new_sort_order);
-  $("#sort-button").text("Sort by: " + this.innerText);
+  $("#sort-button").text("Sort: " + this.innerText);
   $(".active").removeClass("active");
   $(this).addClass("active");
   $("#sort-hidden").attr("value", new_sort_order);
@@ -31,9 +31,9 @@ $(".dropdown-filter-checkbox").change(function () {
   $("#filter-hidden").attr("value", checkedValues);
   let checkedValuesLength = checkedValues.length;
   if (checkedValuesLength > 0) {
-    $("#filter-button").text("Ingredients Filter (" + checkedValuesLength + ")");
+    $("#filter-button").text("Ingredients (" + checkedValuesLength + ")");
   }
   else {
-    $("#filter-button").text("Ingredients Filter");
+    $("#filter-button").text("Ingredients");
   }
 });
