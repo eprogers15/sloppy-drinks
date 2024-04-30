@@ -21,13 +21,19 @@ $(".dropdown-sort-item").click(function () {
   $(".active").removeClass("active");
   $(this).addClass("active");
   $("#sort-hidden").attr("value", new_sort_order);
-  $("#filter-button").attr("hx-vals", '{"sort": "' + new_sort_order + '"}');
 });
 
 $(".dropdown-filter-checkbox").change(function () {
-  checkedValues = [];
+  let checkedValues = [];
   $(".dropdown-filter-checkbox:checked").each(function () {
     checkedValues.push($(this).attr("id"));
   });
   $("#filter-hidden").attr("value", checkedValues);
+  let checkedValuesLength = checkedValues.length;
+  if (checkedValuesLength > 0) {
+    $("#filter-button").text("Ingredients Filter (" + checkedValuesLength + ")");
+  }
+  else {
+    $("#filter-button").text("Ingredients Filter");
+  }
 });
