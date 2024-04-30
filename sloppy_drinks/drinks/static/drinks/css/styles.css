@@ -42,7 +42,7 @@ nav .collapse {
     overflow-y: auto;
 }
 
-.drink {
+.drinks.drink {
     opacity: 1;
     animation-name: fadeInOpacity;
     animation-iteration-count: 1;
