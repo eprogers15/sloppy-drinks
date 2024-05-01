@@ -9,7 +9,7 @@
                         name="q" placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="input delay:0.2s" hx-include="#sort-hidden, #filter-hidden">
                 </form>
-                <div class="dropdown col py-3 text-center">
+                <div class="dropdown col pt-3 text-center">
                     <button class="btn btn-outline-light dropdown-toggle w-100" id="filter-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="change from:.dropdown-filter-item delay:0.2s"
@@ -25,7 +25,7 @@
                     </ul>
                     <input type="hidden" id="filter-hidden" name="filter">
                 </div>
-                <div class="dropdown col pt-3 text-center">
+                <div class="dropdown col py-3 text-center">
                     <button class="btn btn-outline-light dropdown-toggle w-100" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="click from:.dropdown-sort-item delay:0.2s"

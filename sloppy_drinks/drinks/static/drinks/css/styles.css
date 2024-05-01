@@ -74,6 +74,9 @@ nav .collapse {
 
 .no-match-text {
     color: #363636;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
 }
 
 footer {
