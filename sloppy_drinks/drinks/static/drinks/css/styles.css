@@ -12,7 +12,8 @@ nav {
     border-radius: 50%;
 }
 
-.navbar-brand, .navbar-brand:hover {
+.navbar-brand,
+.navbar-brand:hover {
     color: #ffffff;
     text-decoration: none;
     font-family: "Grandstander", cursive;
@@ -54,6 +55,7 @@ nav .collapse {
     0% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
@@ -72,11 +74,17 @@ nav .collapse {
     opacity: 0.9;
 }
 
-.no-match-text {
-    color: #363636;
-    text-align: center;
+.no-match-text-container {
+    height: 60vh;
+    width: 100%;
+    display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
+}
+
+.no-match-text {
+    color: #898B8A;
+    text-align: center;
 }
 
 footer {
@@ -92,7 +100,8 @@ footer {
     color: #ffffff;
 }
 
-.nav-link, .nav-link:hover {
+.nav-link,
+.nav-link:hover {
     color: #363636;
     text-decoration: none;
 }

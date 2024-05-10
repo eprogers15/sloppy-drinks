@@ -14,6 +14,7 @@ $(window).resize(function () {
   }, 500);
 });
 
+// Prevent pressing Enter in search bar from submitting the form and reloading the page
 $(function () {
   $("#search-bar-form").submit(function () {
     return false;
@@ -43,8 +44,9 @@ $(".dropdown-filter-checkbox").change(function () {
   }
 });
 
-$(document).ready(function() {
-  $('.ingredients-dropdown-list').on('click', function(e){
+// Prevent ingredients filter dropdown from closing when label is clicked
+$(document).ready(function () {
+  $(".ingredients-dropdown-list").on("click", function (e) {
     e.stopPropagation();
   });
 });
