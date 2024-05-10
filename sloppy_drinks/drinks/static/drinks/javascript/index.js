@@ -42,3 +42,9 @@ $(".dropdown-filter-checkbox").change(function () {
     $("#filter-button").text("Ingredients");
   }
 });
+
+$(document).ready(function() {
+  $('.ingredients-dropdown-list').on('click', function(e){
+    e.stopPropagation();
+  });
+});
