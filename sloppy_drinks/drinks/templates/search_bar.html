@@ -26,7 +26,7 @@
                     <input type="hidden" id="filter-hidden" name="filter">
                 </div>
                 <div class="dropdown col py-3 text-center">
-                    <button class="btn btn-outline-dark dropdown-toggle w-100" id="sort-button" type="button"
+                    <button class="btn dropdown-toggle w-100" id="sort-button" type="button"
                         data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
                         hx-target="#results" hx-trigger="click from:.dropdown-sort-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
