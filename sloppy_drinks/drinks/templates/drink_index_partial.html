@@ -1,7 +1,7 @@
 {% load static %}
 
 <div class="container">
-    <div class="row row-cols-3 g-0" id="drinks">
+    <div class="row row-cols-3 g-1" id="drinks">
         {% if page.object_list|length > 0 %}
         {% for drink in page.object_list %}
         <div class="col drink">
