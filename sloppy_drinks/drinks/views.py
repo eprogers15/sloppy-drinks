@@ -59,7 +59,7 @@ def drink_detail(request, slug):
     recipe_image = drink.image_set.get(recipe=True)
     non_recipe_images = drink.image_set.filter(recipe=False).order_by('filename')
     episodes = drink.episode_set.all().order_by('number')
-    similar_drinks = Image.objects.filter(drink__in=drink.get_similar_drinks())
+    similar_drinks = Image.objects.filter(drink__in=drink.get_similar_drinks(), recipe=True)
     context = {
         "drink": drink,
         "recipe_image": recipe_image,
