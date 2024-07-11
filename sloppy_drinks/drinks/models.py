@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import F, FloatField, ExpressionWrapper, Count, Q
+from django.db.models.functions import Cast
 
 # Create your models here.
 class Ingredient(models.Model):
@@ -28,20 +30,9 @@ class Drink(models.Model):
     def __str__(self):
         return f"{self.name}"
     
+    # Return three Drink objects with highest similarity score sorted first descending by similarity_score and second ascending by name
     def get_similar_drinks(self):
-        total_similar_drinks = Drink.objects.filter(ingredients__in=self.ingredients.all()).exclude(name=self.name)
-        unique_similar_drinks = total_similar_drinks.distinct()
-        drink_ingredients = set(self.ingredients.all())
-        similar_drinks_dict = {}
-        for unique_drink in unique_similar_drinks:
-            unique_drink_ingredients = set(unique_drink.ingredients.all())
-            intersection = len(drink_ingredients.intersection(unique_drink_ingredients))
-            union = len(drink_ingredients.union(unique_drink_ingredients))
-            similarity_score = intersection / union
-            if similarity_score > 0.25:
-                similar_drinks_dict[unique_drink] = similarity_score
-        sorted_similar_drinks_dict = sorted(similar_drinks_dict.items(), key=lambda x: x[1], reverse=True)
-        similar_drinks = [item[0] for item in sorted_similar_drinks_dict[:3]]
+        similar_drinks = Drink.objects.exclude(name=self.name).annotate(intersection_ingredients_count=Count('ingredients', filter=Q(ingredients__in=self.ingredients.all())), union_ingredients_count=Count('ingredients', distinct=True) + self.ingredients.count(), similarity_score=ExpressionWrapper(F('intersection_ingredients_count') / Cast(F('union_ingredients_count') - F('intersection_ingredients_count'), output_field=FloatField()), output_field=FloatField())).filter(similarity_score__gt=0.3).order_by('-similarity_score', 'name')[:3]
         return similar_drinks
 
 class Episode(models.Model):

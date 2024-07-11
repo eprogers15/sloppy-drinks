@@ -187,9 +187,9 @@
                     {% for similar_drink in similar_drinks %}
                     <div class="col drink">
                         <div class="card shadow-sm">
-                            <a href="{% url 'drink_detail' similar_drink.drink.slug %}">
-                                <img class="card-img-top" src="{% static 'drinks/images/'|add:similar_drink.filename %}"
-                                    alt="{{ similar_drink.drink.name }}">
+                            <a href="{% url 'drink_detail' similar_drink.slug %}">
+                                <img class="card-img-top" src="{% static 'drinks/images/'|add:similar_drink.recipe_image.0.filename %}"
+                                    alt="{{ similar_drink.name }}">
                             </a>
                         </div>
                     </div>
