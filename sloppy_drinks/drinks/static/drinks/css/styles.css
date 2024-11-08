@@ -34,8 +34,35 @@ nav {
     color: #ffffff;
 }
 
-.search_bar {
-    background-color: #87d2d3;
+#search-bar {
+    border-radius: 4px;
+    /* Adjust the value for desired roundness */
+    border-color: initial;
+}
+
+.form-control#search-bar:focus {
+    outline: none !important;
+    /* Remove the default outline */
+    box-shadow: none !important;
+    /* Remove any box shadow if present */
+}
+
+#search-bar.clear-visible {
+    border-top-right-radius: 0;
+    /* Remove the top-right corner */
+    border-bottom-right-radius: 0;
+    /* Remove the bottom-right corner */
+    border-right: none;
+}
+
+#clear-button {
+    display: none;
+    /* Hide the clear button initially */
+    background-color: white;
+    /* Makes the background transparent */
+    border-left: none;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
 .ingredients-dropdown-list {
@@ -145,4 +172,8 @@ footer {
 #sort-button {
     background-color: #363636;
     color: #ffffff;
+}
+
+.hidden {
+    display: none;
 }

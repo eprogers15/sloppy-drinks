@@ -5,14 +5,27 @@
         <div class="col-md-8 center-column">
             <div class="row">
                 <form class="form-inline col-lg-5 pt-3" id="search-bar-form">
-                    <input type="text" class="form-control" id="search-bar" aria-label="Text input with dropdown button"
-                        name="q" placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
-                        hx-target="#results" hx-trigger="input delay:0.2s" hx-include="#sort-hidden, #filter-hidden">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="search-bar"
+                            aria-label="Text input with dropdown button" name="q"
+                            placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
+                            hx-target="#results" hx-trigger="input delay:0.2s"
+                            hx-include="#sort-hidden, #filter-hidden">
+                        <button type="button" class="btn btn-outline-dark" id="clear-button"
+                            hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
+                            hx-include="#search-bar, #sort-hidden, #filter-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-x" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd"
+                                    d="M1.5 1.5a.5.5 0 0 1 .707 0L8 7.293l5.793-5.793a.5.5 0 0 1 .707.707L8.707 8l5.793 5.793a.5.5 0 0 1-.707.707L8 8.707l-5.793 5.793a.5.5 0 0 1-.707-.707L7.293 8 1.5 2.207a.5.5 0 0 1 0-.707z" />
+                            </svg>
+                        </button>
+                    </div>
                 </form>
                 <div class="dropdown col pt-3 text-center">
-                    <button class="btn dropdown-toggle w-100" id="filter-button" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
-                        hx-target="#results" hx-trigger="change from:.dropdown-filter-item delay:0.2s"
+                    <button class="btn dropdown-toggle w-100" id="filter-button" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                        hx-trigger="change from:.dropdown-filter-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
                     <ul class="dropdown-menu ingredients-dropdown-list">
                         {% for filter_ingredient in filter_ingredients %}
@@ -26,9 +39,9 @@
                     <input type="hidden" id="filter-hidden" name="filter">
                 </div>
                 <div class="dropdown col py-3 text-center">
-                    <button class="btn dropdown-toggle w-100" id="sort-button" type="button"
-                        data-bs-toggle="dropdown" aria-expanded="false" hx-get="{% url 'drink_index_partial' %}"
-                        hx-target="#results" hx-trigger="click from:.dropdown-sort-item delay:0.2s"
+                    <button class="btn dropdown-toggle w-100" id="sort-button" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                        hx-trigger="click from:.dropdown-sort-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
                         A-Z</button>
                     <ul class="dropdown-menu">

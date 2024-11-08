@@ -50,3 +50,22 @@ $(document).ready(function () {
     e.stopPropagation();
   });
 });
+
+// Determine whether or not clear button should be visible in search bar
+$("#search-bar").on("input", function () {
+  if ($("#search-bar").val()) {
+    $("#clear-button").show(); // Show the clear button
+    $("#search-bar").addClass("clear-visible"); // Change search bar
+  } else {
+    $("#clear-button").hide(); // Hide the clear button
+    $("#search-bar").removeClass("clear-visible");
+  }
+});
+
+// Handle change when search bar clear button is clicked
+$("#clear-button").click(function () {
+  $("#search-bar").val("");
+  $("#search-bar").focus();
+  $("#clear-button").hide();
+  $("#search-bar").removeClass("clear-visible");
+});
