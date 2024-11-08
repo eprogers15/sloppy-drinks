@@ -57,12 +57,14 @@ nav {
 
 #clear-button {
     display: none;
-    /* Hide the clear button initially */
     background-color: white;
-    /* Makes the background transparent */
     border-left: none;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+}
+
+#clear-button:hover, #clear-button:active, #clear-button:focus-visible {
+    color: currentColor;
 }
 
 .ingredients-dropdown-list {
