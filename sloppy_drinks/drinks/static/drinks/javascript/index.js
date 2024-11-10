@@ -1,19 +1,3 @@
-// Reset starting point of body content based on navbar height after button click
-$(".navbar-toggler").click(function () {
-  setTimeout(function () {
-    let padding = $("nav").outerHeight(true) + "px";
-    $("body").css("paddingTop", padding);
-  }, 500);
-});
-
-// Reset starting point of body content based on navbar height after window resizing
-$(window).resize(function () {
-  setTimeout(function () {
-    let padding = $("nav").outerHeight(true) + "px";
-    $("body").css("paddingTop", padding);
-  }, 500);
-});
-
 // Prevent pressing Enter in search bar from submitting the form and reloading the page
 $(function () {
   $("#search-bar-form").submit(function () {
