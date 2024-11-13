@@ -35,6 +35,11 @@
                             <label for="{{ filter_ingredient.name }}">{{ filter_ingredient.name }}</label>
                         </div>
                         {% endfor %}
+                        <div class="clear-filter-button-and-divider" id="clearFilterButtonAndDivider">
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item clear-filter-button" id="clearFilterButton" hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
+                            hx-include="#search-bar, #sort-hidden, #filter-hidden">Clear Filters</button>
+                        </div>
                     </ul>
                     <input type="hidden" id="filter-hidden" name="filter">
                 </div>

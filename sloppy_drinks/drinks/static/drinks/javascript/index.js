@@ -52,4 +52,20 @@ $("#clear-button").click(function () {
   $("#search-bar").focus();
   $("#clear-button").hide();
   $("#search-bar").removeClass("clear-visible");
+  $('#search-bar').change();
+});
+
+// Determine whether or not clear filters button should be visible in ingredients filter dropdown menu
+$(".dropdown-filter-checkbox").change(function() {
+  if ($('.dropdown-filter-checkbox:checked').length > 0) {
+    $("#clearFilterButtonAndDivider").show();
+  } else {
+    $("#clearFilterButtonAndDivider").hide();
+  }
+});
+
+// Handle change when clear filteres button is clicked
+$("#clearFilterButton").click(function() {
+  $('.dropdown-filter-checkbox:checked').prop('checked', false);
+  $('.dropdown-filter-checkbox').change();
 });

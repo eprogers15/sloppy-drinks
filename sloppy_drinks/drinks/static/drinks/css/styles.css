@@ -68,8 +68,19 @@ nav {
 }
 
 .ingredients-dropdown-list {
-    max-height: 280px;
+    max-height: 200px;
     overflow-y: auto;
+    padding-bottom: 0px;
+}
+
+.clear-filter-button-and-divider {
+    display: none;
+    position: sticky;
+    bottom: 0;
+    background: white;
+    z-index: 1;
+    text-align: center;
+    padding-bottom: 8px;
 }
 
 #results .drink {
