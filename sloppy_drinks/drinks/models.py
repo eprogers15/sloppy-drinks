@@ -46,6 +46,7 @@ class Episode(models.Model):
     youtube_url = models.URLField(max_length=200, blank=True, default='')
     instagram_post_url = models.URLField(max_length=200, blank=True, null=True)
     x_post_url = models.URLField(max_length=200, blank=True, null=True)
+    bluesky_post_url = models.URLField(max_length=200, blank=True, null=True)
 
 class ImageSource(models.Model):
     """Model representing an image source"""
