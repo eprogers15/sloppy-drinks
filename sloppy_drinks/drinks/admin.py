@@ -20,7 +20,7 @@ class EpisodeAdmin(admin.ModelAdmin):
     ordering = ['number']
 
 class ImageSourceAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'url']
     ordering = ['name']
 
 class ImageAdmin(admin.ModelAdmin):
