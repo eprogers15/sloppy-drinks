@@ -16,12 +16,14 @@
                     {% endfor %}
                 </div>
                 <div class="carousel-inner">
-                    <div class="carousel-item active">
+                    <div class="carousel-item active" image-source-name="{{ recipe_image.source.name }}"
+                        image-source-url="{{ recipe_image.source.url }}">
                         <img class="d-block w-100" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
                             alt="{{ recipe_image.drink.name }}">
                     </div>
                     {% for non_recipe_image in non_recipe_images %}
-                    <div class="carousel-item">
+                    <div class="carousel-item" image-source-name="{{ non_recipe_image.source.name }}"
+                        image-source-url="{{ non_recipe_image.source.url }}">
                         <img class="d-block w-100" src="{% static 'drinks/images/'|add:non_recipe_image.filename %}"
                             alt="{{ non_recipe_image.drink.name }}">
                     </div>
@@ -58,6 +60,9 @@
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#social">Social Media</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#imageSource">Image Source</a>
+                    </li>
                     {% else %}
                     <li class="nav-item">
                         {% if episodes|length > 1 %}
@@ -68,6 +73,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="tab" href="#social">Social Media</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" href="#imageSource">Image Source</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -185,6 +193,20 @@
                             {% endif %}
                         </li>
                         {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane" id="imageSource">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <p class="card-text" id="image-source-text">
+                                Image by
+                                {% if recipe_image.source.url %}
+                                <a class="image-source-link" href="{{ recipe_image.source.url }}" target="_blank">{{ recipe_image.source.name }}</a>
+                                {% else %}
+                                {{ recipe_image.source.name }}
+                                {% endif %}
+                            </p>
+                        </li>
                     </ul>
                 </div>
             </form>
