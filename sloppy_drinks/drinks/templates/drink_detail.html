@@ -11,8 +11,7 @@
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                         class="active" aria-current="true" aria-label="Slide 1"></button>
                     {% for non_recipe_image in non_recipe_images %}
-                    <button type="button" data-bs-target="#carouselExampleIndicators"
-                        data-bs-slide-to="{{ forloop.counter }}"
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter }}"
                         aria-label="Slide {{ forloop.counter|add:1 }}"></button>
                     {% endfor %}
                 </div>
@@ -86,9 +85,8 @@
                 <div class="tab-pane active" id="recipe">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <p class="card-text">Source: {{ drink.recipe_source.name }} {% if drink.recipe_url %}(<a
-                                    class="recipe-link" href="{{ drink.recipe_url }}" target="_blank">Link</a>){% endif
-                                %}</p>
+                             <p class="card-text">Source: {{ drink.recipe_source.name }} {% if drink.recipe_url %}(<a
+                            class="recipe-link" href="{{ drink.recipe_url }}" target="_blank">Link</a>){% endif %}</p>
                         </li>
                     </ul>
                 </div>
@@ -98,16 +96,14 @@
                         <li class="list-group-item">
                             <p class=" card-text">Episode {{ episode.number }}: {{ episode.title }} ({{ episode.date }})
                             </p>
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.spotify_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.spotify_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-spotify svg-icon" viewBox="0 0 16 16">
                                     <path
                                         d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288" />
                                 </svg>
                             </a>
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.apple_podcasts_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.apple_podcasts_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-broadcast-pin svg-icon" viewBox="0 0 16 16">
                                     <path
@@ -115,8 +111,7 @@
                                 </svg>
                             </a>
                             {% if episode.youtube_url %}
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.youtube_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.youtube_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-youtube svg-icon" viewBox="0 0 16 16">
                                     <path
@@ -135,16 +130,14 @@
                         <li class="list-group-item">
                             <p class=" card-text">Episode {{ episode.number }}: {{ episode.title }} ({{ episode.date }})
                             </p>
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.spotify_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.spotify_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-spotify svg-icon" viewBox="0 0 16 16">
                                     <path
                                         d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m3.669 11.538a.5.5 0 0 1-.686.165c-1.879-1.147-4.243-1.407-7.028-.77a.499.499 0 0 1-.222-.973c3.048-.696 5.662-.397 7.77.892a.5.5 0 0 1 .166.686m.979-2.178a.624.624 0 0 1-.858.205c-2.15-1.321-5.428-1.704-7.972-.932a.625.625 0 0 1-.362-1.194c2.905-.881 6.517-.454 8.986 1.063a.624.624 0 0 1 .206.858m.084-2.268C10.154 5.56 5.9 5.419 3.438 6.166a.748.748 0 1 1-.434-1.432c2.825-.857 7.523-.692 10.492 1.07a.747.747 0 1 1-.764 1.288" />
                                 </svg>
                             </a>
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.apple_podcasts_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.apple_podcasts_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-broadcast-pin svg-icon" viewBox="0 0 16 16">
                                     <path
@@ -152,8 +145,7 @@
                                 </svg>
                             </a>
                             {% if episode.youtube_url %}
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.youtube_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.youtube_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-youtube svg-icon" viewBox="0 0 16 16">
                                     <path
@@ -173,8 +165,7 @@
                             <p class="card-text">Episode {{ episode.number}}: {{ episode.title }} ({{ episode.date }})
                             </p>
                             {% if episode.instagram_post_url %}
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.instagram_post_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.instagram_post_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                     class="bi bi-instagram svg-icon" viewBox="0 0 16 16">
                                     <path
@@ -192,13 +183,11 @@
                             </a>
                             {% endif %}
                             {% if episode.bluesky_post_url %}
-                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.bluesky_post_url }}"
-                                target="_blank">
+                            <a class="svg-icon-link svg-icon-link-dark" href="{{ episode.bluesky_post_url }}" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
-                                    class="bi bi-twitter-x svg-icon"
-                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+                                    class="bi bi-twitter-x svg-icon" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                                     <path
-                                        d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z" />
+                                        d="M111.8 62.2C170.2 105.9 233 194.7 256 242.4c23-47.6 85.8-136.4 144.2-180.2c42.1-31.6 110.3-56 110.3 21.8c0 15.5-8.9 130.5-14.1 149.2C478.2 298 412 314.6 353.1 304.5c102.9 17.5 129.1 75.5 72.5 133.5c-107.4 110.2-154.3-27.6-166.3-62.9l0 0c-1.7-4.9-2.6-7.8-3.3-7.8s-1.6 3-3.3 7.8l0 0c-12 35.3-59 173.1-166.3 62.9c-56.5-58-30.4-116 72.5-133.5C100 314.6 33.8 298 15.7 233.1C10.4 214.4 1.5 99.4 1.5 83.9c0-77.8 68.2-53.4 110.3-21.8z"/>
                                 </svg>
                             </a>
                             {% endif %}
@@ -212,8 +201,7 @@
                             <p class="card-text" id="image-source-text">
                                 Image by
                                 {% if recipe_image.source.url %}
-                                <a class="image-source-link" href="{{ recipe_image.source.url }}" target="_blank">{{
-                                    recipe_image.source.name }}</a>
+                                <a class="image-source-link" href="{{ recipe_image.source.url }}" target="_blank">{{ recipe_image.source.name }}</a>
                                 {% else %}
                                 {{ recipe_image.source.name }}
                                 {% endif %}
@@ -225,20 +213,18 @@
         </div>
         {% if similar_drinks %}
         <div class="container px-0 pt-3 pb-1" id="similar-drinks-container">
-            <h2 class="pb-2 border-bottom similar-drinks-heading">Drinks similar to the <span style="color:#F66095;">{{
-                    drink.name }}</span></h2>
+            <h2 class="pb-2 border-bottom similar-drinks-heading">Drinks similar to the <span style="color:#F66095;">{{ drink.name }}</span></h2>
             <div class="row row-cols-3 g-1" id="drinks">
-                {% for similar_drink in similar_drinks %}
-                <div class="col drink">
-                    <div class="card shadow-sm">
-                        <a href="{% url 'drink_detail' similar_drink.slug %}">
-                            <img class="card-img-top"
-                                src="{% static 'drinks/images/'|add:similar_drink.recipe_image.0.filename %}"
-                                alt="{{ similar_drink.name }}">
-                        </a>
+                    {% for similar_drink in similar_drinks %}
+                    <div class="col drink">
+                        <div class="card shadow-sm">
+                            <a href="{% url 'drink_detail' similar_drink.slug %}">
+                                <img class="card-img-top" src="{% static 'drinks/images/'|add:similar_drink.recipe_image.0.filename %}"
+                                    alt="{{ similar_drink.name }}">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
             </div>
         </div>
         {% endif %}
