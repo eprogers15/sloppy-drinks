@@ -190,3 +190,11 @@ footer {
 .hidden {
     display: none;
 }
+
+/* add to your custom CSS */
+@media (max-width: 576px) {          /* iPad-mini portrait is 768 px logical, but 2× DPR → 384 CSS px */
+    #drinks.row-cols-3 {              /* override the 3-column rule */
+        --bs-gutter-x: .25rem;       /* tighten the gutters */
+        row-cols: 2 !important;     /* 2 columns fits fine */
+    }
+}
