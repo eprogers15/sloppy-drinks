@@ -38,9 +38,20 @@
             </button>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-section">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-8 col-md-7 py-4">
+                    <div class="col-md-4 py-2">
+                        <h4 class="nav-profile-heading">Hi, {{ user.username|default:"Guest" }}!</h4>
+                        {% if user.is_authenticated %}
+                            <div>
+                                <a class="nav-profile-link text-decoration-none" href="{% url 'password_change' %}">Reset Password</a>
+                            </div>
+                            {% include "registration/_logout.html" %}
+                        {% else %}
+                            <a class="nav-profile-link text-decoration-none" href="{% url 'login' %}">Login</a> / <a href="{% url 'sign_up' %}" class="nav-profile-link text-decoration-none">Register</a>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-4 py-2">
                         <h4 class="nav-about-heading">About</h4>
                         <p class="nav-about-text">"The website that takes a deep dive into the podcast that takes a deep
                             dive into the drinks that you love." Sloppy Drinks is a catalog of all the cocktail recipes
@@ -71,7 +82,7 @@
                             </svg>
                         </a>
                     </div>
-                    <div class="col-sm-4 offset-md-1 py-4">
+                    <div class="col-md-4 py-2">
                         <h4 class="nav-contact-heading">Contact</h4>
                         <p>Sloppy Drinks was created by Emmett Rogers.</p>
                         <a class="svg-icon-link svg-icon-link-light" href="mailto:emmett@sloppydrinks.com"

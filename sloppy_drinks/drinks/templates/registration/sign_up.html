@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_content %}
+<h2>Sign Up</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Sign Up" />
+</form>
+<p>
+    <a href="{% url 'drink_index' %}">Back to dashboard</a>
+</p>
+{% endblock page_content %}

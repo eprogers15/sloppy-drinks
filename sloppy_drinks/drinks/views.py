@@ -1,7 +1,10 @@
-from django.db.models import Q, Prefetch, Min, Count, Subquery
+from django.contrib.auth import login
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.db.models import Q, Prefetch, Min, Count, Subquery
+from django.shortcuts import redirect, render
+from django.urls import reverse
 from drinks.models import Drink, Ingredient, Image, Episode
+from .forms import CustomUserCreationForm
 
 def drink_index(request):
     drinks = Drink.objects.all().prefetch_related(Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="recipe_image")).annotate(episode_number=Min('episode__number')).order_by('name')
@@ -69,3 +72,14 @@ def drink_detail(request, slug):
         "similar_drinks": similar_drinks,
     }
     return render(request, "drink_detail.html", context)
+
+def sign_up(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect(reverse('drink_index'))
+    else:
+        form = CustomUserCreationForm()
+    return render(request, 'registration/sign_up.html', {'form': form})

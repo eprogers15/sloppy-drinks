@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block page_content %}
+<h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Login" />
+        <input type="hidden" name="next" value="{% url 'drink_index' %}" />
+    </form>
+    <p>
+        <a href="{% url 'drink_index' %}">Back to dashboard</a>
+        <a href="{% url 'password_reset' %}">Forgot your password?</a>
+    </p>
+{% endblock page_content %}
