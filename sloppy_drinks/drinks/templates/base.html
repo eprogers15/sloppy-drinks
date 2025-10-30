@@ -23,9 +23,10 @@
 </head>
 
 <body class="d-flex flex-column h-100">
-    <nav class="navbar navbar-dark shadow-sm fixed-top">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <nav class="navbar navbar-dark shadow-sm fixed-top" aria-label="Main navigation">
         <div class="container-fluid">
-            <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none me-2 lh-1">
+            <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none me-2 lh-1" aria-label="Sloppy Drinks home">
                 <img class="navbar-icon me-2"
                     src="{% static 'drinks/images/the-sloppy-boys-podcast-glass-logo-square.jpeg' %}" width="40"
                     height="40">
@@ -42,6 +43,7 @@
                 <div class="row">
                     <div class="col-md-4 py-2">
                         <h4 class="nav-profile-heading">Hi, {{ user.username|default:"Guest" }}!</h4>
+                        <nav aria-label="User account navigation">
                         {% if user.is_authenticated %}
                             <div>
                                 <a class="nav-profile-link text-decoration-none" href="{% url 'password_change' %}">Reset Password</a>
@@ -50,6 +52,7 @@
                         {% else %}
                             <a class="nav-profile-link text-decoration-none" href="{% url 'login' %}">Login</a> / <a href="{% url 'sign_up' %}" class="nav-profile-link text-decoration-none">Sign Up</a>
                         {% endif %}
+                        </nav>
                     </div>
                     <div class="col-md-4 py-2">
                         <h4 class="nav-about-heading">About</h4>
@@ -58,7 +61,7 @@
                             covered on The Sloppy Boys podcast. Listen here:
                         </p>
                         <a class="svg-icon-link svg-icon-link-light"
-                            href="https://open.spotify.com/show/3qFjDCQ16YrjFw5ufNpV3c" target="_blank">
+                            href="https://open.spotify.com/show/3qFjDCQ16YrjFw5ufNpV3c" target="_blank" aria-label="Listen on Spotify">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-spotify svg-icon" viewBox="0 0 16 16">
                                 <path
@@ -66,7 +69,7 @@
                             </svg>
                         </a>
                         <a class="svg-icon-link svg-icon-link-light"
-                            href="https://podcasts.apple.com/us/podcast/the-sloppy-boys/id1537187838" target="_blank">
+                            href="https://podcasts.apple.com/us/podcast/the-sloppy-boys/id1537187838" target="_blank" aria-label="Listen on Apple Podcasts">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-broadcast-pin svg-icon" viewBox="0 0 16 16">
                                 <path
@@ -74,7 +77,7 @@
                             </svg>
                         </a>
                         <a class="svg-icon-link svg-icon-link-light" href="http://www.youtube.com/@TheSloppyBoys"
-                            target="_blank">
+                            target="_blank" aria-label="Watch on YouTube">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-youtube svg-icon" viewBox="0 0 16 16">
                                 <path
@@ -86,7 +89,7 @@
                         <h4 class="nav-contact-heading">Contact</h4>
                         <p>Sloppy Drinks was created by Emmett Rogers.</p>
                         <a class="svg-icon-link svg-icon-link-light" href="mailto:emmett@sloppydrinks.com"
-                            target="_blank">
+                            target="_blank" aria-label="Email Emmett Rogers">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-envelope-fill svg-icon" viewBox="0 0 16 16">
                                 <path
@@ -94,7 +97,7 @@
                             </svg>
                         </a>
                         <a class="svg-icon-link svg-icon-link-light" href="https://www.linkedin.com/in/emmett-rogers/"
-                            target="_blank">
+                            target="_blank" aria-label="Connect on LinkedIn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                                 class="bi bi-linkedin svg-icon" viewBox="0 0 16 16">
                                 <path
@@ -106,12 +109,12 @@
             </div>
         </div>
     </nav>
-    <main>
+    <main id="main-content" tabindex="-1">
         {% block page_content %}{% endblock page_content %}
     </main>
-    <footer class="mt-auto py-3">
+    <footer class="mt-auto py-3" role="contentinfo">
         <div class="container d-flex flex-wrap justify-content-between align-items-center">
-            <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none me-2 lh-1">
+            <a href="/" class="d-flex align-items-center text-body-emphasis text-decoration-none me-2 lh-1" aria-label="Return to home">
                 <img class="footer-icon me-2"
                     src="{% static 'drinks/images/the-sloppy-boys-podcast-glass-logo-square.jpeg' %}" width="20"
                     height="20">

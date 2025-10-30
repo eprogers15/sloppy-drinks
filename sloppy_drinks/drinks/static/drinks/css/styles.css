@@ -3,6 +3,25 @@ body {
     background-color: #87d2d3;
 }
 
+/* Skip link for keyboard accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #363636;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    z-index: 100;
+    border-radius: 0 0 4px 0;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 3px solid #F66095;
+    outline-offset: 2px;
+}
+
 nav {
     background-color: #363636;
 }
@@ -26,6 +45,12 @@ nav {
     border-color: #ffffff;
 }
 
+.navbar-toggler:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    box-shadow: none;
+}
+
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1.0)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
@@ -38,6 +63,12 @@ nav {
     color: #ffffff;
 }
 
+.nav-profile-link:focus {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
 #search-bar {
     border-radius: 4px;
     /* Adjust the value for desired roundness */
@@ -45,10 +76,9 @@ nav {
 }
 
 .form-control#search-bar:focus {
-    outline: none !important;
-    /* Remove the default outline */
+    outline: 2px solid #363636 !important;
+    outline-offset: 2px !important;
     box-shadow: none !important;
-    /* Remove any box shadow if present */
 }
 
 #search-bar.clear-visible {
@@ -67,14 +97,31 @@ nav {
     border-bottom-right-radius: 4px;
 }
 
-#clear-button:hover, #clear-button:active, #clear-button:focus-visible {
+#clear-button:hover, #clear-button:active {
     color: currentColor;
+}
+
+#clear-button:focus {
+    outline: 2px solid #363636;
+    outline-offset: 2px;
 }
 
 .ingredients-dropdown-list {
     max-height: 200px;
     overflow-y: auto;
     padding-bottom: 0px;
+}
+
+/* Better focus indicators for checkboxes */
+.dropdown-filter-checkbox:focus {
+    outline: 2px solid #363636;
+    outline-offset: 2px;
+}
+
+.dropdown-filter-item label {
+    cursor: pointer;
+    padding-left: 8px;
+    user-select: none;
 }
 
 .clear-filter-button-and-divider {
@@ -125,6 +172,16 @@ nav {
     opacity: 0.9;
 }
 
+/* Focus indicator for card links */
+.card a:focus {
+    outline: 3px solid #363636;
+    outline-offset: 3px;
+}
+
+.card a:focus img {
+    opacity: 0.9;
+}
+
 .no-match-text-container {
     height: 50vh;
     width: 100%;
@@ -157,6 +214,11 @@ footer {
     text-decoration: none;
 }
 
+.nav-link:focus {
+    outline: 2px solid #363636;
+    outline-offset: 2px;
+}
+
 .svg-icon-link {
     text-decoration: none;
     padding-right: 10px;
@@ -164,6 +226,12 @@ footer {
 
 .svg-icon-link:hover .svg-icon {
     transform: scale(1.2);
+}
+
+.svg-icon-link:focus {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .svg-icon-link-dark {
@@ -183,9 +251,18 @@ footer {
     font-size: 20px;
 }
 
+.drink-name-highlight {
+    color: #F66095;
+}
+
 #filter-button {
     background-color: #363636;
     color: #ffffff;
+}
+
+#filter-button:focus {
+    outline: 2px solid #363636;
+    outline-offset: 2px;
 }
 
 #sort-button {
@@ -193,6 +270,37 @@ footer {
     color: #ffffff;
 }
 
+#sort-button:focus {
+    outline: 2px solid #363636;
+    outline-offset: 2px;
+}
+
 .hidden {
     display: none;
+}
+
+/* Visually hidden class for screen readers */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Ensure dropdown menu items have proper focus */
+.dropdown-item:focus {
+    outline: 2px solid #363636;
+    outline-offset: -2px;
+}
+
+/* Improve carousel button focus */
+.carousel-control-prev:focus,
+.carousel-control-next:focus {
+    outline: 3px solid #363636;
+    outline-offset: 2px;
 }

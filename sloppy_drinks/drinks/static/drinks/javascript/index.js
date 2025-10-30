@@ -1,17 +1,30 @@
 // Prevent pressing Enter in search bar from submitting the form and reloading the page
 $(function () {
-  $("#search-bar-form").submit(function () {
-    return false;
+  $("#search-bar-form").submit(function (e) {
+    e.preventDefault();
   });
 });
 
-$(".dropdown-sort-item").click(function () {
-  let new_sort_order = this.attributes.value.value;
+// Handle sort selection via click or Enter/Space key
+function handleSortSelection(element) {
+  let new_sort_order = element.attributes.value.value;
   $("#sort-button").attr("value", new_sort_order);
-  $("#sort-button").text("Sort: " + this.innerText);
+  $("#sort-button").text("Sort: " + element.innerText);
   $(".active").removeClass("active");
-  $(this).addClass("active");
+  $(element).addClass("active");
   $("#sort-hidden").attr("value", new_sort_order);
+}
+
+$(".dropdown-sort-item").click(function () {
+  handleSortSelection(this);
+});
+
+$(".dropdown-sort-item").keydown(function (e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    handleSortSelection(this);
+    $(this).click();
+  }
 });
 
 $(".dropdown-filter-checkbox").change(function () {
@@ -55,6 +68,14 @@ $("#clear-button").click(function () {
   $('#search-bar').change();
 });
 
+// Ensure clear button is keyboard accessible
+$("#clear-button").keydown(function(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    $(this).click();
+  }
+});
+
 // Determine whether or not clear filters button should be visible in ingredients filter dropdown menu
 $(".dropdown-filter-checkbox").change(function() {
   if ($('.dropdown-filter-checkbox:checked').length > 0) {
@@ -64,10 +85,18 @@ $(".dropdown-filter-checkbox").change(function() {
   }
 });
 
-// Handle change when clear filteres button is clicked
+// Handle change when clear filters button is clicked
 $("#clearFilterButton").click(function() {
   $('.dropdown-filter-checkbox:checked').prop('checked', false);
   $('.dropdown-filter-checkbox').change();
+});
+
+// Handle keyboard navigation for clear filter button
+$("#clearFilterButton").keydown(function(e) {
+  if (e.key === 'Enter' || e.key === ' ') {
+    e.preventDefault();
+    $(this).click();
+  }
 });
 
 // Update carousel image source attribution

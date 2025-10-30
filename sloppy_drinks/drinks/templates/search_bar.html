@@ -4,56 +4,60 @@
     <div class="row justify-content-center">
         <div class="col-md-8 center-column">
             <div class="row">
-                <form class="form-inline col-lg-5 pt-3" id="search-bar-form">
+                <form class="form-inline col-lg-5 pt-3" id="search-bar-form" role="search" aria-label="Search drinks">
+                    <label for="search-bar" class="visually-hidden">Search by drink or ingredient</label>
                     <div class="input-group">
                         <input type="text" class="form-control" id="search-bar"
-                            aria-label="Text input with dropdown button" name="q"
+                            aria-label="Search by drink or ingredient" name="q"
                             placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
                             hx-target="#results" hx-trigger="input delay:0.2s"
-                            hx-include="#sort-hidden, #filter-hidden">
+                            hx-include="#sort-hidden, #filter-hidden"
+                            aria-describedby="search-description">
                         <button type="button" class="btn btn-outline-dark" id="clear-button"
+                            aria-label="Clear search"
                             hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
                             hx-include="#search-bar, #sort-hidden, #filter-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-x" viewBox="0 0 16 16">
+                                class="bi bi-x" viewBox="0 0 16 16" aria-hidden="true">
                                 <path fill-rule="evenodd"
                                     d="M1.5 1.5a.5.5 0 0 1 .707 0L8 7.293l5.793-5.793a.5.5 0 0 1 .707.707L8.707 8l5.793 5.793a.5.5 0 0 1-.707.707L8 8.707l-5.793 5.793a.5.5 0 0 1-.707-.707L7.293 8 1.5 2.207a.5.5 0 0 1 0-.707z" />
                             </svg>
                         </button>
                     </div>
+                    <span id="search-description" class="visually-hidden">Type to filter drinks by name or ingredient</span>
                 </form>
                 <div class="dropdown col pt-3 text-center">
                     <button class="btn dropdown-toggle w-100" id="filter-button" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                        aria-expanded="false" aria-label="Filter by ingredients" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                         hx-trigger="change from:.dropdown-filter-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
-                    <ul class="dropdown-menu ingredients-dropdown-list">
+                    <ul class="dropdown-menu ingredients-dropdown-list" role="group" aria-label="Ingredient filters">
                         {% for filter_ingredient in filter_ingredients %}
-                        <div class="dropdown-item dropdown-filter-item">
+                        <li class="dropdown-item dropdown-filter-item">
                             <input type="checkbox" class="dropdown-filter-checkbox" id="{{ filter_ingredient.name }}"
-                                name="dropdown-filter-checkbox">
+                                name="dropdown-filter-checkbox" aria-label="Filter by {{ filter_ingredient.name }}">
                             <label for="{{ filter_ingredient.name }}">{{ filter_ingredient.name }}</label>
-                        </div>
+                        </li>
                         {% endfor %}
-                        <div class="clear-filter-button-and-divider" id="clearFilterButtonAndDivider">
+                        <li class="clear-filter-button-and-divider" id="clearFilterButtonAndDivider">
                             <div class="dropdown-divider"></div>
                             <button class="dropdown-item clear-filter-button" id="clearFilterButton" hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
                             hx-include="#search-bar, #sort-hidden, #filter-hidden">Clear Filters</button>
-                        </div>
+                        </li>
                     </ul>
                     <input type="hidden" id="filter-hidden" name="filter">
                 </div>
                 <div class="dropdown col py-3 text-center">
                     <button class="btn dropdown-toggle w-100" id="sort-button" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                        aria-expanded="false" aria-label="Sort drinks" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                         hx-trigger="click from:.dropdown-sort-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
                         A-Z</button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item dropdown-sort-item active" value="name">A-Z</a></li>
-                        <li><a class="dropdown-item dropdown-sort-item" value="-name">Z-A</a></li>
-                        <li><a class="dropdown-item dropdown-sort-item" value="-episode_number">New-Old</a></li>
-                        <li><a class="dropdown-item dropdown-sort-item" value="episode_number">Old-New</a></li>
+                    <ul class="dropdown-menu" role="menu" aria-label="Sort options">
+                        <li><a class="dropdown-item dropdown-sort-item active" value="name" role="menuitem" tabindex="0">A-Z</a></li>
+                        <li><a class="dropdown-item dropdown-sort-item" value="-name" role="menuitem" tabindex="0">Z-A</a></li>
+                        <li><a class="dropdown-item dropdown-sort-item" value="-episode_number" role="menuitem" tabindex="0">New-Old</a></li>
+                        <li><a class="dropdown-item dropdown-sort-item" value="episode_number" role="menuitem" tabindex="0">Old-New</a></li>
                     </ul>
                     <input type="hidden" id="sort-hidden" name="sort" value="name">
                 </div>
