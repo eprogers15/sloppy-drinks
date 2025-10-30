@@ -8,8 +8,10 @@ urlpatterns = [
         authentication_form=CustomLoginForm
     ), name='login'),
     path('accounts/password_reset/', auth_views.PasswordResetView.as_view(
-        form_class=CustomPasswordResetForm
+        form_class=CustomPasswordResetForm,
+        html_email_template_name='registration/password_reset_email.html'
     ), name='password_reset'),
+
     path('accounts/reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(
         form_class=CustomSetPasswordForm
     ), name='password_reset_confirm'),
