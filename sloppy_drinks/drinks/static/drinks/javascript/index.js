@@ -363,3 +363,88 @@ if (console && console.log) {
   console.log('Sloppy Drinks JS initialized');
   console.log('Features: Search, Sort, Filter, Carousel, HTMX Error Handling');
 }
+
+// ============================================================================
+// UX ENHANCEMENTS (non-intrusive)
+// - Image error handling
+// - HTMX loading indicator visibility + result dimming
+// - Screen reader announcement after swaps
+// - Scroll-to-top button on long scroll
+// ==========================================================================
+
+// Image error handling for cards
+document.addEventListener('DOMContentLoaded', () => {
+  const handleImageError = (img) => {
+    img.classList.add('error');
+    img.alt = 'Image unavailable';
+    img.removeAttribute('src');
+  };
+
+  document.querySelectorAll('.card-img-top').forEach((img) => {
+    if (img.complete && img.naturalHeight === 0) handleImageError(img);
+    img.addEventListener('error', () => handleImageError(img));
+  });
+
+  const observeContainers = ['drinks', 'similar-drinks-container'];
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType === 1) {
+          node.querySelectorAll?.('.card-img-top').forEach((img) => {
+            img.addEventListener('error', () => handleImageError(img));
+          });
+        }
+      });
+    });
+  });
+  observeContainers.forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el, { childList: true, subtree: true });
+  });
+});
+
+// HTMX indicator show/hide and SR announcement
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.addEventListener('htmx:beforeRequest', () => {
+    const indicator = document.querySelector('.htmx-indicator');
+    if (indicator) indicator.style.display = 'inline-block';
+  });
+  document.body.addEventListener('htmx:afterRequest', () => {
+    const indicator = document.querySelector('.htmx-indicator');
+    if (indicator) setTimeout(() => { indicator.style.display = 'none'; }, 200);
+  });
+
+  document.body.addEventListener('htmx:afterSwap', () => {
+    const announcement = document.createElement('div');
+    announcement.setAttribute('role', 'status');
+    announcement.setAttribute('aria-live', 'polite');
+    announcement.className = 'visually-hidden';
+    announcement.textContent = 'Content updated';
+    document.body.appendChild(announcement);
+    setTimeout(() => announcement.remove(), 800);
+  });
+});
+
+// Scroll to top button
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.createElement('button');
+  btn.setAttribute('aria-label', 'Scroll to top');
+  btn.textContent = '↑';
+  btn.style.cssText = 'position:fixed;bottom:20px;right:20px;width:44px;height:44px;border-radius:50%;background:#363636;color:#fff;border:none;font-size:20px;cursor:pointer;opacity:0;visibility:hidden;transition:all .2s ease;z-index:1000;';
+  document.body.appendChild(btn);
+
+  const onScroll = () => {
+    if (window.pageYOffset > 300) {
+      btn.style.opacity = '1';
+      btn.style.visibility = 'visible';
+    } else {
+      btn.style.opacity = '0';
+      btn.style.visibility = 'hidden';
+    }
+  };
+  window.addEventListener('scroll', onScroll);
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
