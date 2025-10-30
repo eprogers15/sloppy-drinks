@@ -5,52 +5,58 @@
 <div class="container d-flex align-items-center justify-content-center py-3">
     <div class="col-lg-6 col-md-8">
         <div class="card">
-            {% if non_recipe_images|length > 0 %}
-            <div id="carouselExampleIndicators" class="carousel slide card-img-top">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
-                        class="active" aria-current="true" aria-label="Slide 1"></button>
-                    {% for non_recipe_image in non_recipe_images %}
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter }}"
-                        aria-label="Slide {{ forloop.counter|add:1 }}"></button>
-                    {% endfor %}
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active" image-source-name="{{ recipe_image.source.name }}"
-                        image-source-url="{{ recipe_image.source.url }}">
-                        <img class="d-block w-100" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
-                            alt="{{ recipe_image.drink.name }}"
-                            loading="eager"
-                            fetchpriority="high"
-                            decoding="async">
+            {% if recipe_image %}
+                {% if non_recipe_images|length > 0 %}
+                <div id="carouselExampleIndicators" class="carousel slide card-img-top">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                            class="active" aria-current="true" aria-label="Slide 1"></button>
+                        {% for non_recipe_image in non_recipe_images %}
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ forloop.counter }}"
+                            aria-label="Slide {{ forloop.counter|add:1 }}"></button>
+                        {% endfor %}
                     </div>
-                    {% for non_recipe_image in non_recipe_images %}
-                    <div class="carousel-item" image-source-name="{{ non_recipe_image.source.name }}"
-                        image-source-url="{{ non_recipe_image.source.url }}">
-                        <img class="d-block w-100" src="{% static 'drinks/images/'|add:non_recipe_image.filename %}"
-                            alt="{{ non_recipe_image.drink.name }}"
-                            loading="lazy"
-                            decoding="async">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" image-source-name="{{ recipe_image.source.name }}"
+                            image-source-url="{{ recipe_image.source.url }}">
+                            <img class="d-block w-100" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
+                                alt="{{ recipe_image.drink.name }}"
+                                loading="eager"
+                                fetchpriority="high"
+                                decoding="async">
+                        </div>
+                        {% for non_recipe_image in non_recipe_images %}
+                        <div class="carousel-item" image-source-name="{{ non_recipe_image.source.name }}"
+                            image-source-url="{{ non_recipe_image.source.url }}">
+                            <img class="d-block w-100" src="{% static 'drinks/images/'|add:non_recipe_image.filename %}"
+                                alt="{{ non_recipe_image.drink.name }}"
+                                loading="lazy"
+                                decoding="async">
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+                {% else %}
+                <img class="card-img-top" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
+                    alt="{{ recipe_image.drink.name }}"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async">
+                {% endif %}
             {% else %}
-            <img class="card-img-top" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
-                alt="{{ recipe_image.drink.name }}"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async">
+                <div class="card-img-top" style="background: linear-gradient(135deg, #e0e0e0 25%, #f5f5f5 25%, #f5f5f5 50%, #e0e0e0 50%, #e0e0e0 75%, #f5f5f5 75%, #f5f5f5); background-size: 20px 20px; aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center;">
+                    <p class="text-muted">No image available</p>
+                </div>
             {% endif %}
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
@@ -131,11 +137,15 @@
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <p class="card-text" id="image-source-text">
-                                Image by
-                                {% if recipe_image.source.url %}
-                                <a class="image-source-link" href="{{ recipe_image.source.url }}" target="_blank" rel="noopener noreferrer">{{ recipe_image.source.name }}</a>
+                                {% if recipe_image %}
+                                    Image by
+                                    {% if recipe_image.source.url %}
+                                    <a class="image-source-link" href="{{ recipe_image.source.url }}" target="_blank" rel="noopener noreferrer">{{ recipe_image.source.name }}</a>
+                                    {% else %}
+                                    {{ recipe_image.source.name }}
+                                    {% endif %}
                                 {% else %}
-                                {{ recipe_image.source.name }}
+                                    No image source information available
                                 {% endif %}
                             </p>
                         </li>

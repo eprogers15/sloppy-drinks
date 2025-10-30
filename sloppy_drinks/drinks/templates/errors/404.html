@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <h1 class="display-1">404</h1>
+            <h2 class="mb-4">Page Not Found</h2>
+            <p class="lead">Sorry, the page you're looking for doesn't exist.</p>
+            <p>It might have been moved, deleted, or you entered the wrong URL.</p>
+            <a href="{% url 'drink_index' %}" class="btn btn-primary mt-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 8v7A1.5 1.5 0 0 0 3 16.5h10a1.5 1.5 0 0 0 1.5-1.5V8a.5.5 0 0 0-.146-.354l-6-6zM2.5 8v7a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8L8 2l-5.5 6z"/>
+                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1H8a.5.5 0 0 1-.5-.5z"/>
+                    <path d="M15.354 9.354a.5.5 0 0 0-.708-.708L8 14.793 1.354 8.146a.5.5 0 0 0-.708.708l7 7a.5.5 0 0 0 .708 0l7-7z"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock page_content %}
+

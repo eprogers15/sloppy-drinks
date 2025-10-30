@@ -23,3 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('drinks.urls')),
 ]
+
+# Custom error handlers (must be defined after urlpatterns)
+handler404 = 'drinks.views.custom_404'
+handler500 = 'drinks.views.custom_500'
