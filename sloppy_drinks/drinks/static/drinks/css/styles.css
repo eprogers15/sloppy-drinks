@@ -21,6 +21,11 @@ body {
     -webkit-tap-highlight-color: transparent;
 }
 
+/* Remove focus outlines on mouse clicks (keep them for keyboard navigation) */
+*:focus:not(:focus-visible) {
+    outline: none;
+}
+
 /* Optimize rendering */
 img {
     max-width: 100%;
@@ -40,7 +45,7 @@ img {
     border-radius: 0 0 var(--radius-sm) 0;
 }
 
-.skip-link:focus {
+.skip-link:focus-visible {
     top: 0;
     outline: 3px solid var(--color-accent);
     outline-offset: 2px;
@@ -69,7 +74,7 @@ nav {
     border-color: #ffffff;
 }
 
-.navbar-toggler:focus {
+.navbar-toggler:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
     box-shadow: none;
@@ -87,7 +92,7 @@ nav {
     color: var(--color-white);
 }
 
-.nav-profile-link:focus {
+.nav-profile-link:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
     border-radius: 2px;
@@ -99,7 +104,7 @@ nav {
     border-color: initial;
 }
 
-.form-control#search-bar:focus {
+.form-control#search-bar:focus-visible {
     outline: var(--focus-ring) !important;
     outline-offset: 2px !important;
     box-shadow: none !important;
@@ -125,7 +130,7 @@ nav {
     color: currentColor;
 }
 
-#clear-button:focus {
+#clear-button:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
 }
@@ -137,7 +142,7 @@ nav {
 }
 
 /* Better focus indicators for checkboxes */
-.dropdown-filter-checkbox:focus {
+.dropdown-filter-checkbox:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
 }
@@ -200,12 +205,12 @@ nav {
 }
 
 /* Focus indicator for card links */
-.card a:focus {
+.card a:focus-visible {
     outline: 3px solid var(--color-primary-dark);
     outline-offset: 3px;
 }
 
-.card a:focus img {
+.card a:focus-visible img {
     opacity: 0.9;
 }
 
@@ -241,7 +246,7 @@ footer {
     text-decoration: none;
 }
 
-.nav-link:focus {
+.nav-link:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
 }
@@ -255,7 +260,7 @@ footer {
     transform: scale(1.2);
 }
 
-.svg-icon-link:focus {
+.svg-icon-link:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
     border-radius: 4px;
@@ -287,7 +292,7 @@ footer {
     color: var(--color-white);
 }
 
-#filter-button:focus {
+#filter-button:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
 }
@@ -297,7 +302,7 @@ footer {
     color: var(--color-white);
 }
 
-#sort-button:focus {
+#sort-button:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
 }
@@ -320,14 +325,14 @@ footer {
 }
 
 /* Ensure dropdown menu items have proper focus */
-.dropdown-item:focus {
+.dropdown-item:focus-visible {
     outline: var(--focus-ring);
     outline-offset: -2px;
 }
 
 /* Improve carousel button focus */
-.carousel-control-prev:focus,
-.carousel-control-next:focus {
+.carousel-control-prev:focus-visible,
+.carousel-control-next:focus-visible {
     outline: 3px solid var(--color-primary-dark);
     outline-offset: 2px;
 }
