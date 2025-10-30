@@ -1,13 +1,25 @@
 // ============================================================================
 // SLOPPY DRINKS - Main JavaScript
 // Vanilla JavaScript - No dependencies required (except HTMX for AJAX)
+// 
+// Table of Contents:
+// 1. Search Bar Functionality
+// 2. Sort Dropdown Functionality  
+// 3. Filter Dropdown Functionality
+// 4. Carousel Functionality (Drink Detail Page)
+// 5. HTMX Error Handling
+// 6. Utility Functions
+// 7. Initialization
 // ============================================================================
 
 // ============================================================================
-// SEARCH BAR FUNCTIONALITY
+// 1. SEARCH BAR FUNCTIONALITY
 // ============================================================================
 
-// Prevent form submission on Enter key
+/**
+ * Prevent form submission on Enter key in search bar
+ * This allows HTMX to handle the search via AJAX instead of page reload
+ */
 const searchBarForm = document.getElementById('search-bar-form');
 if (searchBarForm) {
   searchBarForm.addEventListener('submit', (e) => {
@@ -15,7 +27,10 @@ if (searchBarForm) {
   });
 }
 
-// Handle search bar clear button visibility
+/**
+ * Handle search bar clear button visibility
+ * Shows clear button when user types, hides when empty
+ */
 const searchBar = document.getElementById('search-bar');
 const clearButton = document.getElementById('clear-button');
 
@@ -30,7 +45,10 @@ if (searchBar && clearButton) {
     }
   });
 
-  // Handle clear button click
+  /**
+   * Handle clear button click
+   * Clears search, refocuses input, and triggers HTMX update
+   */
   clearButton.addEventListener('click', () => {
     searchBar.value = '';
     searchBar.focus();
@@ -42,7 +60,10 @@ if (searchBar && clearButton) {
     searchBar.dispatchEvent(event);
   });
 
-  // Keyboard accessibility for clear button
+  /**
+   * Keyboard accessibility for clear button
+   * Allows Enter/Space to activate the button
+   */
   clearButton.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -52,9 +73,14 @@ if (searchBar && clearButton) {
 }
 
 // ============================================================================
-// SORT DROPDOWN FUNCTIONALITY
+// 2. SORT DROPDOWN FUNCTIONALITY
 // ============================================================================
 
+/**
+ * Handle sort dropdown selection
+ * Updates button text, active state, and hidden input value
+ * @param {HTMLElement} element - The clicked sort dropdown item
+ */
 function handleSortSelection(element) {
   const newSortOrder = element.getAttribute('value');
   const sortButton = document.getElementById('sort-button');
@@ -75,14 +101,20 @@ function handleSortSelection(element) {
   }
 }
 
-// Event delegation for sort dropdown items
+/**
+ * Event delegation for sort dropdown items
+ * Handles clicks on any sort item
+ */
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains('dropdown-sort-item')) {
     handleSortSelection(e.target);
   }
 });
 
-// Keyboard support for sort items
+/**
+ * Keyboard support for sort items
+ * Allows Enter/Space to select sort options
+ */
 document.addEventListener('keydown', (e) => {
   if (e.target.classList.contains('dropdown-sort-item')) {
     if (e.key === 'Enter' || e.key === ' ') {
@@ -94,9 +126,13 @@ document.addEventListener('keydown', (e) => {
 });
 
 // ============================================================================
-// FILTER DROPDOWN FUNCTIONALITY
+// 3. FILTER DROPDOWN FUNCTIONALITY
 // ============================================================================
 
+/**
+ * Update filter button text and state
+ * Shows count of selected filters in button text
+ */
 function updateFilterButton() {
   const filterButton = document.getElementById('filter-button');
   const filterHidden = document.getElementById('filter-hidden');
@@ -113,21 +149,30 @@ function updateFilterButton() {
     }
   }
   
-  // Show/hide clear filters button
+  /**
+   * Show/hide clear filters button
+   * Only shows when at least one filter is selected
+   */
   const clearFilterDiv = document.getElementById('clearFilterButtonAndDivider');
   if (clearFilterDiv) {
     clearFilterDiv.style.display = checkedValues.length > 0 ? 'block' : 'none';
   }
 }
 
-// Event delegation for filter checkboxes
+/**
+ * Event delegation for filter checkboxes
+ * Updates filter button when any checkbox changes
+ */
 document.addEventListener('change', (e) => {
   if (e.target.classList.contains('dropdown-filter-checkbox')) {
     updateFilterButton();
   }
 });
 
-// Clear filters button
+/**
+ * Clear filters button handler
+ * Unchecks all filter checkboxes and updates button state
+ */
 const clearFilterButton = document.getElementById('clearFilterButton');
 if (clearFilterButton) {
   clearFilterButton.addEventListener('click', () => {
@@ -137,7 +182,10 @@ if (clearFilterButton) {
     updateFilterButton();
   });
   
-  // Keyboard support
+  /**
+   * Keyboard support for clear filters button
+   * Allows Enter/Space to activate
+   */
   clearFilterButton.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
@@ -146,7 +194,10 @@ if (clearFilterButton) {
   });
 }
 
-// Prevent dropdown from closing when clicking inside
+/**
+ * Prevent dropdown from closing when clicking inside
+ * Allows users to select multiple filters without dropdown closing
+ */
 const ingredientsList = document.querySelector('.ingredients-dropdown-list');
 if (ingredientsList) {
   ingredientsList.addEventListener('click', (e) => {
@@ -155,9 +206,13 @@ if (ingredientsList) {
 }
 
 // ============================================================================
-// CAROUSEL FUNCTIONALITY (Drink Detail Page)
+// 4. CAROUSEL FUNCTIONALITY (Drink Detail Page)
 // ============================================================================
 
+/**
+ * Update carousel image source attribution
+ * Changes the attribution text when user slides to a different image
+ */
 document.addEventListener('DOMContentLoaded', () => {
   const carousel = document.querySelector('#carouselExampleIndicators');
   
@@ -168,6 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (!imageSourceText) return;
   
+  /**
+   * Updates image source attribution text based on active carousel item
+   */
   function updateImageSource() {
     const activeItem = carousel.querySelector('.carousel-item.active');
     if (!activeItem) return;
@@ -192,15 +250,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================================
-// HTMX ERROR HANDLING
+// 5. HTMX ERROR HANDLING
 // ============================================================================
 
+/**
+ * HTMX error handling and loading states
+ * Provides user feedback when AJAX requests fail or time out
+ */
 document.addEventListener('DOMContentLoaded', () => {
-  // Handle HTMX errors
+  /**
+   * Handle HTMX response errors
+   * Shows user-friendly error message that auto-dismisses
+   */
   document.body.addEventListener('htmx:responseError', (event) => {
     console.error('HTMX request failed:', event.detail);
     
-    // Optional: Show user-friendly error message
+    // Show user-friendly error message
     const errorMessage = document.createElement('div');
     errorMessage.className = 'alert alert-danger alert-dismissible fade show';
     errorMessage.style.position = 'fixed';
@@ -222,12 +287,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 5000);
   });
   
-  // Handle HTMX timeouts
+  /**
+   * Handle HTMX timeouts
+   * Logs timeout for debugging
+   */
   document.body.addEventListener('htmx:timeout', (event) => {
     console.error('HTMX request timed out:', event.detail);
   });
   
-  // Optional: Show loading indicator for HTMX requests
+  /**
+   * Show loading indicator for HTMX requests
+   * Dims results area and prevents interaction during load
+   */
   document.body.addEventListener('htmx:beforeRequest', (event) => {
     const target = event.target;
     if (target.id === 'results') {
@@ -236,6 +307,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
   
+  /**
+   * Remove loading indicator after HTMX request completes
+   */
   document.body.addEventListener('htmx:afterRequest', (event) => {
     const target = event.target;
     if (target.id === 'results') {
@@ -246,10 +320,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ============================================================================
-// UTILITY FUNCTIONS
+// 6. UTILITY FUNCTIONS
 // ============================================================================
 
-// Helper function to safely query elements
+/**
+ * Safely query a single element
+ * @param {string} selector - CSS selector
+ * @returns {Element|null} - Found element or null
+ */
 function safeQuerySelector(selector) {
   try {
     return document.querySelector(selector);
@@ -259,7 +337,11 @@ function safeQuerySelector(selector) {
   }
 }
 
-// Helper function to safely query multiple elements
+/**
+ * Safely query multiple elements
+ * @param {string} selector - CSS selector
+ * @returns {NodeList|Array} - Found elements or empty array
+ */
 function safeQuerySelectorAll(selector) {
   try {
     return document.querySelectorAll(selector);
@@ -270,10 +352,14 @@ function safeQuerySelectorAll(selector) {
 }
 
 // ============================================================================
-// INITIALIZATION
+// 7. INITIALIZATION
 // ============================================================================
 
-// Log that JavaScript has loaded successfully
+/**
+ * Log successful JavaScript initialization
+ * Useful for debugging and confirming script load
+ */
 if (console && console.log) {
   console.log('Sloppy Drinks JS initialized');
+  console.log('Features: Search, Sort, Filter, Carousel, HTMX Error Handling');
 }
