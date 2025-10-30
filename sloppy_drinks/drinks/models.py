@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import F, FloatField, ExpressionWrapper, Count, Q
+from django.db.models import F, FloatField, ExpressionWrapper, Count, Q, Case, When
 from django.db.models.functions import Cast
 
 # Create your models here.
@@ -32,7 +32,23 @@ class Drink(models.Model):
     
     # Return three Drink objects with highest similarity score sorted first descending by similarity_score and second ascending by name
     def get_similar_drinks(self):
-        similar_drinks = Drink.objects.exclude(name=self.name).annotate(intersection_ingredients_count=Count('ingredients', filter=Q(ingredients__in=self.ingredients.all())), union_ingredients_count=Count('ingredients', distinct=True) + self.ingredients.count(), similarity_score=ExpressionWrapper(F('intersection_ingredients_count') / Cast(F('union_ingredients_count') - F('intersection_ingredients_count'), output_field=FloatField()), output_field=FloatField())).filter(similarity_score__gt=0.3).order_by('-similarity_score', 'name')[:3]
+        # Calculate similarity using Jaccard coefficient: intersection / union
+        similar_drinks = Drink.objects.exclude(name=self.name).annotate(
+            intersection_ingredients_count=Count('ingredients', filter=Q(ingredients__in=self.ingredients.all())), 
+            union_ingredients_count=Count('ingredients', distinct=True) + self.ingredients.count()
+        ).annotate(
+            # Prevent division by zero: if denominator is 0, return 0
+            similarity_score=ExpressionWrapper(
+                Case(
+                    When(union_ingredients_count=F('intersection_ingredients_count'), then=0.0),
+                    default=F('intersection_ingredients_count') / Cast(
+                        F('union_ingredients_count') - F('intersection_ingredients_count'), 
+                        output_field=FloatField()
+                    )
+                ),
+                output_field=FloatField()
+            )
+        ).filter(similarity_score__gt=0.3).order_by('-similarity_score', 'name')[:3]
         return similar_drinks
 
 class Episode(models.Model):
