@@ -1,7 +1,18 @@
+/* CSS Variables */
+:root {
+    --color-bg: #87d2d3;
+    --color-primary-dark: #363636;
+    --color-accent: #F66095;
+    --color-white: #ffffff;
+    --radius-sm: 4px;
+    --focus-ring: 2px solid var(--color-primary-dark);
+    --transition-fast: 0.2s ease;
+}
+
 /* Performance: Use system font stack as fallback while custom font loads */
 body {
     padding-top: 56px;
-    background-color: #87d2d3;
+    background-color: var(--color-bg);
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
@@ -21,22 +32,22 @@ img {
     position: absolute;
     top: -40px;
     left: 0;
-    background: #363636;
-    color: white;
+    background: var(--color-primary-dark);
+    color: var(--color-white);
     padding: 8px;
     text-decoration: none;
     z-index: 100;
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 var(--radius-sm) 0;
 }
 
 .skip-link:focus {
     top: 0;
-    outline: 3px solid #F66095;
+    outline: 3px solid var(--color-accent);
     outline-offset: 2px;
 }
 
 nav {
-    background-color: #363636;
+    background-color: var(--color-primary-dark);
 }
 
 .navbar-icon {
@@ -46,7 +57,7 @@ nav {
 
 .navbar-brand,
 .navbar-brand:hover {
-    color: #ffffff;
+    color: var(--color-white);
     text-decoration: none;
     font-family: "Grandstander", cursive;
     font-optical-sizing: auto;
@@ -59,7 +70,7 @@ nav {
 }
 
 .navbar-toggler:focus {
-    outline: 2px solid #ffffff;
+    outline: var(--focus-ring);
     outline-offset: 2px;
     box-shadow: none;
 }
@@ -69,15 +80,15 @@ nav {
 }
 
 #navbar-collapse-section {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .nav-profile-link {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .nav-profile-link:focus {
-    outline: 2px solid #ffffff;
+    outline: var(--focus-ring);
     outline-offset: 2px;
     border-radius: 2px;
 }
@@ -89,7 +100,7 @@ nav {
 }
 
 .form-control#search-bar:focus {
-    outline: 2px solid #363636 !important;
+    outline: var(--focus-ring) !important;
     outline-offset: 2px !important;
     box-shadow: none !important;
 }
@@ -115,7 +126,7 @@ nav {
 }
 
 #clear-button:focus {
-    outline: 2px solid #363636;
+    outline: var(--focus-ring);
     outline-offset: 2px;
 }
 
@@ -127,7 +138,7 @@ nav {
 
 /* Better focus indicators for checkboxes */
 .dropdown-filter-checkbox:focus {
-    outline: 2px solid #363636;
+    outline: var(--focus-ring);
     outline-offset: 2px;
 }
 
@@ -190,7 +201,7 @@ nav {
 
 /* Focus indicator for card links */
 .card a:focus {
-    outline: 3px solid #363636;
+    outline: 3px solid var(--color-primary-dark);
     outline-offset: 3px;
 }
 
@@ -207,12 +218,12 @@ nav {
 }
 
 .no-match-text {
-    color: #ffffff;
+    color: var(--color-white);
     text-align: center;
 }
 
 footer {
-    background-color: #363636;
+    background-color: var(--color-primary-dark);
 }
 
 .footer-icon {
@@ -221,17 +232,17 @@ footer {
 }
 
 .footer-text {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .nav-link,
 .nav-link:hover {
-    color: #363636;
+    color: var(--color-primary-dark);
     text-decoration: none;
 }
 
 .nav-link:focus {
-    outline: 2px solid #363636;
+    outline: var(--focus-ring);
     outline-offset: 2px;
 }
 
@@ -251,43 +262,43 @@ footer {
 }
 
 .svg-icon-link-dark {
-    color: #363636;
+    color: var(--color-primary-dark);
 }
 
 .svg-icon-link-light {
-    color: #ffffff;
+    color: var(--color-white);
 }
 
 .svg-icon {
-    transition: all 0.3s;
+    transition: transform var(--transition-fast), opacity var(--transition-fast);
 }
 
 .similar-drinks-heading {
-    color: #363636;
+    color: var(--color-primary-dark);
     font-size: 20px;
 }
 
 .drink-name-highlight {
-    color: #F66095;
+    color: var(--color-accent);
 }
 
 #filter-button {
-    background-color: #363636;
-    color: #ffffff;
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
 }
 
 #filter-button:focus {
-    outline: 2px solid #363636;
+    outline: var(--focus-ring);
     outline-offset: 2px;
 }
 
 #sort-button {
-    background-color: #363636;
-    color: #ffffff;
+    background-color: var(--color-primary-dark);
+    color: var(--color-white);
 }
 
 #sort-button:focus {
-    outline: 2px solid #363636;
+    outline: var(--focus-ring);
     outline-offset: 2px;
 }
 
@@ -310,15 +321,42 @@ footer {
 
 /* Ensure dropdown menu items have proper focus */
 .dropdown-item:focus {
-    outline: 2px solid #363636;
+    outline: var(--focus-ring);
     outline-offset: -2px;
 }
 
 /* Improve carousel button focus */
 .carousel-control-prev:focus,
 .carousel-control-next:focus {
-    outline: 3px solid #363636;
+    outline: 3px solid var(--color-primary-dark);
     outline-offset: 2px;
+}
+
+/* Custom Scrollbar (non-intrusive) */
+/* Applies where overflow appears, e.g., ingredients list */
+.ingredients-dropdown-list::-webkit-scrollbar {
+    width: 10px;
+}
+
+.ingredients-dropdown-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.ingredients-dropdown-list::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.ingredients-dropdown-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+/* Print styles */
+@media print {
+    nav, footer, .navbar, .nav, .dropdown-menu { display: none !important; }
+    body { background: #ffffff !important; }
+    .card { box-shadow: none !important; border: 0 !important; }
+    img { max-width: 100% !important; height: auto !important; }
 }
 
 /* Performance optimizations */
