@@ -69,3 +69,37 @@ $("#clearFilterButton").click(function() {
   $('.dropdown-filter-checkbox:checked').prop('checked', false);
   $('.dropdown-filter-checkbox').change();
 });
+
+// Update carousel image source attribution
+document.addEventListener('DOMContentLoaded', function () {
+  const carousel = document.querySelector('#carouselExampleIndicators');
+  
+  // Only run if carousel exists on the page
+  if (!carousel) return;
+  
+  const imageSourceText = document.getElementById('image-source-text');
+
+  const updateImageSource = () => {
+    const activeItem = carousel.querySelector('.carousel-item.active');
+    const imageSourceName = activeItem.getAttribute('image-source-name') || 'Unknown';
+    const imageSourceUrl = activeItem.getAttribute('image-source-url') || 'Unknown';
+    
+    let htmlContent;
+    if (imageSourceUrl) {
+      // If there is a URL, make the imageSourceName a link
+      htmlContent = `Image by <a class="image-source-link" href="${imageSourceUrl}" target="_blank">${imageSourceName}</a>`;
+    } else {
+      // If there is no URL, just display the name
+      htmlContent = `Image by ${imageSourceName}`;
+    }
+    imageSourceText.innerHTML = htmlContent;
+  };
+
+  // Update on initial load
+  updateImageSource();
+
+  // Update when carousel slides
+  carousel.addEventListener('slid.bs.carousel', function () {
+    updateImageSource();
+  });
+});
