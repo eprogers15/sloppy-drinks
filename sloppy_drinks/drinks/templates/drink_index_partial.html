@@ -12,9 +12,11 @@
                          alt="{{ drink.name }} cocktail"
                          {% if page.number == 1 and forloop.counter <= 9 %}
                          loading="eager"
+                         fetchpriority="high"
                          {% else %}
                          loading="lazy"
-                         {% endif %}>
+                         {% endif %}
+                         decoding="async">
                 </a>
             </div>
             {% if page.has_next and forloop.last %}

@@ -19,13 +19,18 @@
                     <div class="carousel-item active" image-source-name="{{ recipe_image.source.name }}"
                         image-source-url="{{ recipe_image.source.url }}">
                         <img class="d-block w-100" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
-                            alt="{{ recipe_image.drink.name }}">
+                            alt="{{ recipe_image.drink.name }}"
+                            loading="eager"
+                            fetchpriority="high"
+                            decoding="async">
                     </div>
                     {% for non_recipe_image in non_recipe_images %}
                     <div class="carousel-item" image-source-name="{{ non_recipe_image.source.name }}"
                         image-source-url="{{ non_recipe_image.source.url }}">
                         <img class="d-block w-100" src="{% static 'drinks/images/'|add:non_recipe_image.filename %}"
-                            alt="{{ non_recipe_image.drink.name }}">
+                            alt="{{ non_recipe_image.drink.name }}"
+                            loading="lazy"
+                            decoding="async">
                     </div>
                     {% endfor %}
                 </div>
@@ -42,7 +47,10 @@
             </div>
             {% else %}
             <img class="card-img-top" src="{% static 'drinks/images/'|add:recipe_image.filename %}"
-                alt="{{ recipe_image.drink.name }}">
+                alt="{{ recipe_image.drink.name }}"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async">
             {% endif %}
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
@@ -220,7 +228,9 @@
                         <div class="card shadow-sm">
                             <a href="{% url 'drink_detail' similar_drink.slug %}" aria-label="View details for {{ similar_drink.name }}">
                                 <img class="card-img-top" src="{% static 'drinks/images/'|add:similar_drink.recipe_image.0.filename %}"
-                                    alt="{{ similar_drink.name }} cocktail">
+                                    alt="{{ similar_drink.name }} cocktail"
+                                    loading="lazy"
+                                    decoding="async">
                             </a>
                         </div>
                     </div>
