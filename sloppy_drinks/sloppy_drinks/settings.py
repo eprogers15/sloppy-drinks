@@ -158,3 +158,30 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS') == 'True'
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL')
+
+# Session Security
+SESSION_COOKIE_SECURE = not DEBUG  # Only send cookie over HTTPS in production
+SESSION_COOKIE_HTTPONLY = True  # Prevent JavaScript access to session cookie
+SESSION_COOKIE_SAMESITE = 'Lax'  # CSRF protection
+SESSION_COOKIE_AGE = 1209600  # 2 weeks (default)
+
+# CSRF Security
+CSRF_COOKIE_SECURE = not DEBUG  # Only send cookie over HTTPS in production
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# Force HTTPS redirect in production
+SECURE_SSL_REDIRECT = not DEBUG
+
+# Other security headers
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+
+# Login / Logout Redirects
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'drink_index'
+LOGOUT_REDIRECT_URL = 'drink_index'

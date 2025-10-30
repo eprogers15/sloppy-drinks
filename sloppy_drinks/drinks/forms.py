@@ -14,10 +14,17 @@ class CustomUserCreationForm(UserCreationForm):
     
     def clean_email(self):
         """Ensure email is unique"""
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exists():
+        email = self.cleaned_data.get('email').lower()
+        if User.objects.filter(email__iexact=email).exists():
             raise ValidationError('A user with this email already exists.')
         return email
+    
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.email = self.cleaned_data['email'].lower()
+        if commit:
+            user.save()
+        return user
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

@@ -1,8 +1,11 @@
+from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
 from django.db.models import Q, Prefetch, Min, Count, Subquery
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from drinks.forms import CustomLoginForm
 from drinks.models import Drink, Ingredient, Image, Episode
 from .forms import CustomUserCreationForm
 
@@ -74,12 +77,23 @@ def drink_detail(request, slug):
     return render(request, "drink_detail.html", context)
 
 def sign_up(request):
+    if request.user.is_authenticated:
+        return redirect('drink_index')
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+            messages.success(request, f'Welcome, {user.username}! Your account has been created.')
             return redirect(reverse('drink_index'))
     else:
         form = CustomUserCreationForm()
     return render(request, 'registration/sign_up.html', {'form': form})
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomLoginForm
+    
+    def dispatch(self, request, *args, **kwargs):
+        if self.request.user.is_authenticated:
+            return redirect('drink_index')
+        return super().dispatch(request, *args, **kwargs)
