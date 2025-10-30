@@ -98,6 +98,43 @@ nav {
     border-radius: 2px;
 }
 
+.nav-about-heading,
+.nav-contact-heading {
+    color: var(--color-white);
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Collapsible About and Contact button styling */
+button[data-bs-toggle="collapse"][data-bs-target="#about-collapse"],
+button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] {
+    color: var(--color-white) !important;
+    transition: opacity var(--transition-fast);
+}
+
+button[data-bs-toggle="collapse"][data-bs-target="#about-collapse"]:hover,
+button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"]:hover {
+    opacity: 0.85;
+}
+
+button[data-bs-toggle="collapse"][data-bs-target="#about-collapse"]:focus-visible,
+button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"]:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* Rotate chevrons when expanded */
+button[data-bs-toggle="collapse"][data-bs-target="#about-collapse"][aria-expanded="true"] .about-chevron,
+button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"][aria-expanded="true"] .contact-chevron {
+    transform: rotate(180deg);
+}
+
+button[data-bs-toggle="collapse"][data-bs-target="#about-collapse"] .about-chevron,
+button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-chevron {
+    transition: transform var(--transition-fast);
+}
+
 /* Search bar container - unified styling */
 .input-group#search-input-group {
     border-radius: 4px;

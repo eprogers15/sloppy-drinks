@@ -72,7 +72,59 @@
                         {% endif %}
                         </nav>
                     </div>
-                    <div class="col-md-4 py-2">
+                    <!-- Collapsible About button for small screens -->
+                    <div class="col-12 d-md-none py-2">
+                        <button class="btn btn-link text-white text-decoration-none p-0 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#about-collapse" aria-expanded="false" aria-controls="about-collapse">
+                            <h4 class="nav-about-heading mb-0 d-inline-flex align-items-center">
+                                About
+                                <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down ms-2 about-chevron" aria-hidden="true">
+                                    <use href="#icon-chevron-down" />
+                                </svg>
+                            </h4>
+                        </button>
+                        <div class="collapse mt-2" id="about-collapse">
+                            <p class="nav-about-text">"The website that takes a deep dive into the podcast that takes a deep
+                                dive into the drinks that you love." Sloppy Drinks is a catalog of all the cocktail recipes
+                                covered on The Sloppy Boys podcast. Listen here:
+                            </p>
+                            <a class="svg-icon-link svg-icon-link-light"
+                                href="https://open.spotify.com/show/3qFjDCQ16YrjFw5ufNpV3c" target="_blank" rel="noopener noreferrer" aria-label="Listen on Spotify">
+                                <svg width="30" height="30" fill="currentColor" class="bi bi-spotify svg-icon" aria-hidden="true"><use href="#icon-spotify" /></svg>
+                            </a>
+                            <a class="svg-icon-link svg-icon-link-light"
+                                href="https://podcasts.apple.com/us/podcast/the-sloppy-boys/id1537187838" target="_blank" rel="noopener noreferrer" aria-label="Listen on Apple Podcasts">
+                                <svg width="30" height="30" fill="currentColor" class="bi bi-broadcast-pin svg-icon" aria-hidden="true"><use href="#icon-broadcast-pin" /></svg>
+                            </a>
+                            <a class="svg-icon-link svg-icon-link-light" href="https://www.youtube.com/@TheSloppyBoys"
+                                target="_blank" rel="noopener noreferrer" aria-label="Watch on YouTube">
+                                <svg width="30" height="30" fill="currentColor" class="bi bi-youtube svg-icon" aria-hidden="true"><use href="#icon-youtube" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Collapsible Contact button for small screens -->
+                    <div class="col-12 d-md-none py-2">
+                        <button class="btn btn-link text-white text-decoration-none p-0 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#contact-collapse" aria-expanded="false" aria-controls="contact-collapse">
+                            <h4 class="nav-contact-heading mb-0 d-inline-flex align-items-center">
+                                Contact
+                                <svg width="20" height="20" fill="currentColor" class="bi bi-chevron-down ms-2 contact-chevron" aria-hidden="true">
+                                    <use href="#icon-chevron-down" />
+                                </svg>
+                            </h4>
+                        </button>
+                        <div class="collapse mt-2" id="contact-collapse">
+                            <p>Sloppy Drinks was created by Emmett Rogers.</p>
+                            <a class="svg-icon-link svg-icon-link-light" href="mailto:emmett@sloppydrinks.com"
+                                aria-label="Email Emmett Rogers">
+                                <svg width="30" height="30" fill="currentColor" class="bi bi-envelope-fill svg-icon" aria-hidden="true"><use href="#icon-envelope-fill" /></svg>
+                            </a>
+                            <a class="svg-icon-link svg-icon-link-light" href="https://www.linkedin.com/in/emmett-rogers/"
+                                target="_blank" rel="noopener noreferrer" aria-label="Connect on LinkedIn">
+                                <svg width="30" height="30" fill="currentColor" class="bi bi-linkedin svg-icon" aria-hidden="true"><use href="#icon-linkedin" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- About section - visible on md and above -->
+                    <div class="col-md-4 py-2 d-none d-md-block">
                         <h4 class="nav-about-heading">About</h4>
                         <p class="nav-about-text">"The website that takes a deep dive into the podcast that takes a deep
                             dive into the drinks that you love." Sloppy Drinks is a catalog of all the cocktail recipes
@@ -91,7 +143,8 @@
                             <svg width="30" height="30" fill="currentColor" class="bi bi-youtube svg-icon" aria-hidden="true"><use href="#icon-youtube" /></svg>
                         </a>
                     </div>
-                    <div class="col-md-4 py-2">
+                    <!-- Contact section - visible on md and above -->
+                    <div class="col-md-4 py-2 d-none d-md-block">
                         <h4 class="nav-contact-heading">Contact</h4>
                         <p>Sloppy Drinks was created by Emmett Rogers.</p>
                         <a class="svg-icon-link svg-icon-link-light" href="mailto:emmett@sloppydrinks.com"
