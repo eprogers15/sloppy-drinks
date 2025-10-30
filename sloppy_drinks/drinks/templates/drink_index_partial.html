@@ -29,8 +29,14 @@
         </div>
         {% endfor %}
         {% else %}
-        <div class="container center-container no-match-text-container">
-            <h2 class="no-match-text">No drinks match your search. Try again.</h2>
+        <div class="no-match-text-container">
+            <div class="no-match-content">
+                <svg class="no-match-icon" width="64" height="64" viewBox="-1 -1 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.397h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" fill="currentColor"/>
+                </svg>
+                <h3 class="no-match-heading">No drinks found matching your search</h3>
+                <p class="no-match-suggestion">Try <span class="no-match-accent">different keywords</span> or <span class="no-match-accent">clear your filters</span></p>
+            </div>
         </div>
         {% endif %}
     </div>
