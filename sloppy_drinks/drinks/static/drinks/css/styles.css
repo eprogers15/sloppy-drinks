@@ -98,41 +98,56 @@ nav {
     border-radius: 2px;
 }
 
-#search-bar {
+/* Search bar container - unified styling */
+.input-group#search-input-group {
     border-radius: 4px;
-    /* Adjust the value for desired roundness */
-    border-color: initial;
+    border: 1px solid #ced4da;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    overflow: hidden; /* Ensure border radius is applied correctly */
+}
+
+/* When input is focused, highlight the entire group */
+#search-input-group.input-focused,
+#search-input-group:has(#search-bar:focus),
+#search-input-group:has(#search-bar:focus-visible) {
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 2px rgba(54, 54, 54, 0.1);
+}
+
+/* Input styling - no individual border/outline */
+#search-bar {
+    border: none;
+    border-radius: 4px;
 }
 
 .form-control#search-bar:focus-visible {
-    outline: var(--focus-ring) !important;
-    outline-offset: 2px !important;
+    outline: none !important;
     box-shadow: none !important;
 }
 
+/* When clear button is visible, adjust input border radius */
 #search-bar.clear-visible {
     border-top-right-radius: 0;
-    /* Remove the top-right corner */
     border-bottom-right-radius: 0;
-    /* Remove the bottom-right corner */
-    border-right: none;
 }
 
 #clear-button {
     display: none;
     background-color: white;
-    border-left: none;
+    border: none;
+    border-left: 1px solid #ced4da;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
 }
 
 #clear-button:hover, #clear-button:active {
     color: currentColor;
+    background-color: #f8f9fa;
 }
 
 #clear-button:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: 2px;
+    outline: 2px solid var(--color-primary-dark);
+    outline-offset: -2px;
 }
 
 .ingredients-dropdown-list {

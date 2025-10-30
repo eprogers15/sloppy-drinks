@@ -6,7 +6,7 @@
             <div class="row">
                 <form class="form-inline col-lg-5 pt-3" id="search-bar-form" role="search" aria-label="Search drinks">
                     <label for="search-bar" class="visually-hidden">Search by drink or ingredient</label>
-                    <div class="input-group">
+                    <div class="input-group" id="search-input-group">
                         <input type="text" class="form-control" id="search-bar"
                             aria-label="Search by drink or ingredient" name="q"
                             placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"

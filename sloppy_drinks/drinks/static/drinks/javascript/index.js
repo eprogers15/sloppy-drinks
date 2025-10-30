@@ -33,8 +33,9 @@ if (searchBarForm) {
  */
 const searchBar = document.getElementById('search-bar');
 const clearButton = document.getElementById('clear-button');
+const searchInputGroup = document.getElementById('search-input-group');
 
-if (searchBar && clearButton) {
+if (searchBar && clearButton && searchInputGroup) {
   searchBar.addEventListener('input', () => {
     if (searchBar.value) {
       clearButton.style.display = 'block';
@@ -43,6 +44,15 @@ if (searchBar && clearButton) {
       clearButton.style.display = 'none';
       searchBar.classList.remove('clear-visible');
     }
+  });
+
+  // Add focused class to input group when input is focused (fallback for browsers without :has() support)
+  searchBar.addEventListener('focus', () => {
+    searchInputGroup.classList.add('input-focused');
+  });
+
+  searchBar.addEventListener('blur', () => {
+    searchInputGroup.classList.remove('input-focused');
   });
 
   /**
