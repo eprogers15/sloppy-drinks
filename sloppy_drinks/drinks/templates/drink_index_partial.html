@@ -7,8 +7,14 @@
         <div class="col drink">
             <div class="card shadow-sm">
                 <a href="{% url 'drink_detail' drink.slug %}">
-                    <img class="card-img-top" src="{% static 'drinks/images/'|add:drink.recipe_image.0.filename %}"
-                        alt="{{ drink.name }}">
+                    <img class="card-img-top" 
+                         src="{% static 'drinks/images/'|add:drink.recipe_image.0.filename %}"
+                         alt="{{ drink.name }}"
+                         {% if page.number == 1 and forloop.counter <= 9 %}
+                         loading="eager"
+                         {% else %}
+                         loading="lazy"
+                         {% endif %}>
                 </a>
             </div>
             {% if page.has_next and forloop.last %}

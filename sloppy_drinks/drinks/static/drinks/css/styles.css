@@ -112,6 +112,8 @@ nav {
 
 .card-img-top {
     border-radius: 0%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
 }
 
 .card {
