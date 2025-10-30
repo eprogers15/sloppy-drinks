@@ -90,6 +90,17 @@ nav {
 
 .nav-profile-link {
     color: var(--color-white);
+    opacity: 0.9;
+    transition: opacity var(--transition-fast);
+}
+
+.nav-profile-link:hover {
+    opacity: 1;
+}
+
+.nav-profile-link-primary {
+    opacity: 1;
+    font-weight: 500;
 }
 
 .nav-profile-link:focus-visible {

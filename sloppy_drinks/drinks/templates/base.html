@@ -59,21 +59,26 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-section">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4 py-2">
+                    <div class="col-md-4 py-3">
                         <h4 class="nav-profile-heading">Hi, {{ user.username|default:"Guest" }}!</h4>
                         <nav aria-label="User account navigation">
                         {% if user.is_authenticated %}
-                            <div>
+                            <div class="mt-1">
                                 <a class="nav-profile-link text-decoration-none" href="{% url 'password_change' %}">Reset Password</a>
                             </div>
-                            {% include "registration/_logout.html" %}
+                            <div class="mt-1">
+                                {% include "registration/_logout.html" %}
+                            </div>
                         {% else %}
-                            <a class="nav-profile-link text-decoration-none" href="{% url 'login' %}">Login</a> / <a href="{% url 'sign_up' %}" class="nav-profile-link text-decoration-none">Sign Up</a>
+                            <div class="d-flex flex-column mt-2">
+                                <a class="nav-profile-link nav-profile-link-primary text-decoration-none mb-2" href="{% url 'login' %}">Login</a>
+                                <a href="{% url 'sign_up' %}" class="nav-profile-link text-decoration-none">Sign Up</a>
+                            </div>
                         {% endif %}
                         </nav>
                     </div>
                     <!-- Collapsible About button for small screens -->
-                    <div class="col-12 d-md-none py-2">
+                    <div class="col-12 d-md-none py-3">
                         <button class="btn btn-link text-white text-decoration-none p-0 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#about-collapse" aria-expanded="false" aria-controls="about-collapse">
                             <h4 class="nav-about-heading mb-0 d-inline-flex align-items-center">
                                 About
@@ -102,7 +107,7 @@
                         </div>
                     </div>
                     <!-- Collapsible Contact button for small screens -->
-                    <div class="col-12 d-md-none py-2">
+                    <div class="col-12 d-md-none py-3">
                         <button class="btn btn-link text-white text-decoration-none p-0 w-100 text-start" type="button" data-bs-toggle="collapse" data-bs-target="#contact-collapse" aria-expanded="false" aria-controls="contact-collapse">
                             <h4 class="nav-contact-heading mb-0 d-inline-flex align-items-center">
                                 Contact
@@ -124,7 +129,7 @@
                         </div>
                     </div>
                     <!-- About section - visible on md and above -->
-                    <div class="col-md-4 py-2 d-none d-md-block">
+                    <div class="col-md-4 py-3 d-none d-md-block">
                         <h4 class="nav-about-heading">About</h4>
                         <p class="nav-about-text">"The website that takes a deep dive into the podcast that takes a deep
                             dive into the drinks that you love." Sloppy Drinks is a catalog of all the cocktail recipes
@@ -144,7 +149,7 @@
                         </a>
                     </div>
                     <!-- Contact section - visible on md and above -->
-                    <div class="col-md-4 py-2 d-none d-md-block">
+                    <div class="col-md-4 py-3 d-none d-md-block">
                         <h4 class="nav-contact-heading">Contact</h4>
                         <p>Sloppy Drinks was created by Emmett Rogers.</p>
                         <a class="svg-icon-link svg-icon-link-light" href="mailto:emmett@sloppydrinks.com"
