@@ -41,7 +41,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-4 py-2">
-                        <h4 class="nav-profile-heading">Hi, {{ user.first_name|default:"Guest" }}!</h4>
+                        <h4 class="nav-profile-heading">Hi, {{ user.username|default:"Guest" }}!</h4>
                         {% if user.is_authenticated %}
                             <div>
                                 <a class="nav-profile-link text-decoration-none" href="{% url 'password_change' %}">Reset Password</a>

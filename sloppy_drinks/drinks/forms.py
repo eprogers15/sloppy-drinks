@@ -8,19 +8,9 @@ class CustomUserCreationForm(UserCreationForm):
         required=True,
         help_text='Required. Please enter a valid email address.'
     )
-    first_name = forms.CharField(
-        required=True,
-        max_length=150,
-        help_text='Required.'
-    )
-    last_name = forms.CharField(
-        required=True,
-        max_length=150,
-        help_text='Required.'
-    )
 
     class Meta(UserCreationForm.Meta):
-        fields = UserCreationForm.Meta.fields + ("email", "first_name", "last_name")
+        fields = UserCreationForm.Meta.fields + ("email",)
     
     def clean_email(self):
         """Ensure email is unique"""
@@ -49,16 +39,6 @@ class CustomUserCreationForm(UserCreationForm):
         self.fields['email'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'your.email@example.com',
-        })
-        
-        self.fields['first_name'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'First name',
-        })
-        
-        self.fields['last_name'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Last name',
         })
         
         self.fields['password1'].widget.attrs.update({
@@ -124,32 +104,6 @@ class CustomSetPasswordForm(SetPasswordForm):
             'class': 'form-control',
             'placeholder': 'Confirm new password',
         })
-
-class CustomPasswordChangeForm(PasswordChangeForm):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        # Apply Bootstrap classes to all fields
-        self.fields['old_password'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Current password',
-            'autofocus': True,
-        })
-        
-        self.fields['new_password1'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'New password',
-        })
-        
-        self.fields['new_password2'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': 'Confirm new password',
-        })
-        
-        # Update labels for clarity
-        self.fields['old_password'].label = 'Current Password'
-        self.fields['new_password1'].label = 'New Password'
-        self.fields['new_password2'].label = 'Confirm New Password'
 
 class CustomPasswordChangeForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
