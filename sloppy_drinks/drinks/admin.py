@@ -27,6 +27,9 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ['drink', 'filename', 'source', 'recipe']
     ordering = ['drink']
 
+class FavoriteDrink(admin.ModelAdmin):
+    ordering = ['drink']
+
 # Register your models here.
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(RecipeSource, RecipeSourceAdmin)
@@ -34,3 +37,4 @@ admin.site.register(Drink, DrinkAdmin)
 admin.site.register(Episode, EpisodeAdmin)
 admin.site.register(ImageSource, ImageSourceAdmin)
 admin.site.register(Image, ImageAdmin)
+admin.site.register(FavoriteDrink)
