@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import F, FloatField, ExpressionWrapper, Count, Q, Case, When
 from django.db.models.functions import Cast
@@ -78,3 +79,16 @@ class Image(models.Model):
     filename = models.CharField(max_length=240, primary_key=True)
     source = models.ForeignKey(ImageSource, on_delete=models.PROTECT)
     recipe = models.BooleanField(default=False)
+
+class FavoriteDrink(models.Model):
+    """Model representing a user's favorite drink"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    drink = models.ForeignKey(Drink, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ['user', 'drink']
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.user.username} - {self.drink.name}"
