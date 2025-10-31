@@ -27,7 +27,8 @@ class ImageAdmin(admin.ModelAdmin):
     list_display = ['drink', 'filename', 'source', 'recipe']
     ordering = ['drink']
 
-class FavoriteDrink(admin.ModelAdmin):
+class FavoriteDrinkAdmin(admin.ModelAdmin):
+    list_display = ('user', 'drink', 'date_added')
     ordering = ['drink']
 
 # Register your models here.
