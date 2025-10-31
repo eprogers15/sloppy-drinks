@@ -92,3 +92,18 @@ class FavoriteDrink(models.Model):
     
     def __str__(self):
         return f"{self.user.username} - {self.drink.name}"
+    
+    @classmethod
+    def toggle_favorite_drink(cls, user, drink):
+        """Toggles the favorite status of a drink for a user"""
+        favorite, created = cls.objects.get_or_create(user=user, drink=drink)
+        if not created:
+            favorite.delete()
+            return False
+        else:
+            return True
+    
+    @classmethod
+    def is_favorited(cls, user, drink):
+        """Check if a drink is favorited by a user"""
+        return cls.objects.filter(user=user, drink=drink).exists()
