@@ -37,6 +37,12 @@
                                     </svg>
                                     {% endif %}
                                 </div>
+                                {% else %}
+                                <a href="{% url 'login' %}?next={{ request.path }}" class="heart-wrapper" style="cursor: pointer;">
+                                    <svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
+                                        <use href="#icon-heart"></use>
+                                    </svg>
+                                </a>
                                 {% endif %}
                             </div>
                         </div>
@@ -60,6 +66,12 @@
                                     </svg>
                                     {% endif %}
                                 </div>
+                                {% else %}
+                                <a href="{% url 'login' %}?next={{ request.path }}" class="heart-wrapper" style="cursor: pointer;">
+                                    <svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
+                                        <use href="#icon-heart"></use>
+                                    </svg>
+                                </a>
                                 {% endif %}
                             </div>
                         </div>
@@ -95,6 +107,12 @@
                         </svg>
                         {% endif %}
                     </div>
+                    {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="heart-wrapper" style="cursor: pointer;">
+                        <svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
+                            <use href="#icon-heart"></use>
+                        </svg>
+                    </a>
                     {% endif %}
                 </div>
                 {% endif %}

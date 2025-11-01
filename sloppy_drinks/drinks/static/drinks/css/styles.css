@@ -632,6 +632,12 @@ body,
     position: static;
 }
 
+/* Make heart-wrapper links behave like non-link heart wrappers */
+a.heart-wrapper {
+    text-decoration: none;
+    color: inherit;
+}
+
 .detail-heart-clickable {
     pointer-events: all;
     transition: transform var(--transition-fast);
