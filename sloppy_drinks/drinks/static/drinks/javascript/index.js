@@ -229,14 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Only run if carousel exists on the page
   if (!carousel) return;
   
-  // Disable touch/swipe support on carousel to prevent interference with heart clicks
-  // Users can still navigate using the control buttons
-  if (typeof bootstrap !== 'undefined' && bootstrap.Carousel) {
-    const carouselInstance = bootstrap.Carousel.getOrCreateInstance(carousel, {
-      touch: false
-    });
-  }
-  
   const imageSourceText = document.getElementById('image-source-text');
   
   if (!imageSourceText) return;
@@ -270,35 +262,14 @@ document.addEventListener('DOMContentLoaded', () => {
    * Prevent carousel navigation when clicking the heart icon
    * Uses bubbling phase so HTMX can handle the event first, then we stop propagation
    */
-  function attachHeartHandlers() {
-    const heartWrappers = carousel.querySelectorAll('.heart-wrapper');
-    heartWrappers.forEach(heartWrapper => {
-      // Remove existing handlers to avoid duplicates
-      heartWrapper.removeEventListener('click', stopCarouselPropagation);
-      heartWrapper.removeEventListener('mousedown', stopCarouselPropagation);
-      heartWrapper.removeEventListener('touchstart', stopCarouselPropagation);
-      
-      // Attach handler in BUBBLING phase (not capture) so HTMX gets the event first
-      heartWrapper.addEventListener('click', stopCarouselPropagation, false);
-      heartWrapper.addEventListener('mousedown', stopCarouselPropagation, false);
-      heartWrapper.addEventListener('touchstart', stopCarouselPropagation, false);
-    });
-  }
-  
-  function stopCarouselPropagation(e) {
-    // Stop propagation AFTER HTMX has handled it (in bubbling phase)
-    // This prevents Bootstrap carousel from seeing the event
-    e.stopPropagation();
-    // Prevent default on non-click events to stop drag/swipe
-    if (e.type !== 'click') {
-      e.preventDefault();
+  carousel.addEventListener('click', (e) => {
+    if (e.target.closest('.heart-wrapper')) {
+      e.stopPropagation();
+      e.cancelBubble = true;
     }
-  }
+  }, false); // Bubbling phase, not capture
   
-  // Attach handlers on initial load
-  attachHeartHandlers();
-  
-  // Reattach handlers after HTMX swaps content (heart icon gets replaced)
+  // Update all heart icons in the carousel when one gets toggled
   document.body.addEventListener('htmx:afterSwap', (event) => {
     // Check if the swap happened within our carousel
     const swappedHeart = event.detail.target;
@@ -316,59 +287,8 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
       }
-      // Reattach event handlers
-      attachHeartHandlers();
     }
   });
-  
-  // Also stop events on carousel-inner level (Bootstrap might listen here)
-  const carouselInner = carousel.querySelector('.carousel-inner');
-  if (carouselInner) {
-    carouselInner.addEventListener('click', (e) => {
-      if (e.target.closest('.heart-wrapper')) {
-        e.stopPropagation();
-      }
-    }, false); // Bubbling phase
-  }
-  
-  // Use event delegation on carousel in BUBBLING phase as additional protection
-  carousel.addEventListener('click', (e) => {
-    if (e.target.closest('.heart-wrapper')) {
-      e.stopPropagation();
-      // Also stop on the event object to prevent any handlers on parent elements
-      e.cancelBubble = true;
-    }
-  }, false); // Bubbling phase, not capture
-  
-  // Stop mousedown/touch events in capture phase to prevent drag/swipe behavior
-  // Bootstrap carousel might use these for swipe detection
-  carousel.addEventListener('mousedown', (e) => {
-    if (e.target.closest('.heart-wrapper')) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  }, true); // Capture phase to stop before Bootstrap processes
-  
-  carousel.addEventListener('touchstart', (e) => {
-    if (e.target.closest('.heart-wrapper')) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  }, true); // Capture phase to stop before Bootstrap processes
-  
-  carousel.addEventListener('touchmove', (e) => {
-    if (e.target.closest('.heart-wrapper')) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  }, true);
-  
-  carousel.addEventListener('touchend', (e) => {
-    if (e.target.closest('.heart-wrapper')) {
-      e.stopPropagation();
-      e.preventDefault();
-    }
-  }, true);
 });
 
 // ============================================================================
