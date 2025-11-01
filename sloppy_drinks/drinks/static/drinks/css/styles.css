@@ -595,3 +595,41 @@ body,
     z-index: 1;
     pointer-events: none;
 }
+
+/* Detail page heart overlay - separate from index page styles */
+.detail-img-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.detail-heart-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 24px;
+    height: 24px;
+    z-index: 1;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.detail-heart-overlay use {
+    overflow: visible;
+}
+
+.detail-heart-filled {
+    fill: #dc3545;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.detail-heart-unfilled {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 1.5px;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    shape-rendering: geometricPrecision;
+    vector-effect: non-scaling-stroke;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    overflow: visible;
+}

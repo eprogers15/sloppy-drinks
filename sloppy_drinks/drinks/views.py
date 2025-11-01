@@ -204,6 +204,12 @@ def drink_detail(request, slug):
         non_recipe_images = drink.image_set.filter(recipe=False).order_by('filename')
         episodes = drink.episode_set.all().order_by('number')
         
+        # Add favorite status for authenticated users
+        if request.user.is_authenticated:
+            drink.is_favorited = FavoriteDrink.objects.filter(user=request.user, drink=drink).exists()
+        else:
+            drink.is_favorited = False
+        
         # Handle similar drinks calculation with error checking
         try:
             similar_drinks = drink.get_similar_drinks().prefetch_related(
