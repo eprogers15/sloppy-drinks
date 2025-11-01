@@ -264,3 +264,19 @@ def custom_500(request):
     """Custom 500 error handler"""
     logger.error('500 error occurred', exc_info=True)
     return render(request, 'errors/500.html', status=500)
+
+def toggle_favorite_drink(request, slug):
+    """Toggle favorite status for a drink"""
+    if not request.user.is_authenticated:
+        return render(request, 'errors/404.html', status=404)
+    
+    try:
+        drink = get_object_or_404(Drink, slug=slug)
+        is_favorited = FavoriteDrink.toggle_favorite_drink(request.user, drink)
+        
+        return render(request, 'heart_icon_partial.html', {
+            'is_favorited': is_favorited
+        })
+    except Exception as e:
+        logger.error(f'Error toggling favorite for slug {slug}: {e}', exc_info=True)
+        return render(request, 'errors/500.html', status=500)

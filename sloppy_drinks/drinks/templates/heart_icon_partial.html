@@ -1,0 +1,10 @@
+{% if is_favorited %}
+<svg class="detail-heart-overlay detail-heart-filled detail-heart-clickable" aria-label="Favorited drink">
+    <use href="#icon-heart-fill"></use>
+</svg>
+{% else %}
+<svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
+    <use href="#icon-heart"></use>
+</svg>
+{% endif %}
+

@@ -617,6 +617,29 @@ body,
     overflow: visible;
 }
 
+.heart-wrapper {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 24px;
+    height: 24px;
+    z-index: 1;
+    overflow: visible;
+}
+
+.heart-wrapper .detail-heart-overlay {
+    position: static;
+}
+
+.detail-heart-clickable {
+    pointer-events: all;
+    transition: transform var(--transition-fast);
+}
+
+.detail-heart-clickable:active {
+    transform: scale(0.9);
+}
+
 .detail-heart-filled {
     fill: #dc3545;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));

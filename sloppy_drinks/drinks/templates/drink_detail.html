@@ -26,15 +26,17 @@
                                     fetchpriority="high"
                                     decoding="async">
                                 {% if user.is_authenticated %}
+                                <div class="heart-wrapper" hx-get="{% url 'toggle_favorite_drink' drink.slug %}" hx-target="this" hx-swap="innerHTML" style="cursor: pointer;">
                                     {% if drink.is_favorited %}
-                                    <svg class="detail-heart-overlay detail-heart-filled" aria-label="Favorited drink">
+                                    <svg class="detail-heart-overlay detail-heart-filled detail-heart-clickable" aria-label="Favorited drink">
                                         <use href="#icon-heart-fill"></use>
                                     </svg>
                                     {% else %}
-                                    <svg class="detail-heart-overlay detail-heart-unfilled" aria-label="Not favorited">
+                                    <svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
                                         <use href="#icon-heart"></use>
                                     </svg>
                                     {% endif %}
+                                </div>
                                 {% endif %}
                             </div>
                         </div>
@@ -47,15 +49,17 @@
                                     loading="lazy"
                                     decoding="async">
                                 {% if user.is_authenticated %}
+                                <div class="heart-wrapper" hx-get="{% url 'toggle_favorite_drink' drink.slug %}" hx-target="this" hx-swap="innerHTML" style="cursor: pointer;">
                                     {% if drink.is_favorited %}
-                                    <svg class="detail-heart-overlay detail-heart-filled" aria-label="Favorited drink">
+                                    <svg class="detail-heart-overlay detail-heart-filled detail-heart-clickable" aria-label="Favorited drink">
                                         <use href="#icon-heart-fill"></use>
                                     </svg>
                                     {% else %}
-                                    <svg class="detail-heart-overlay detail-heart-unfilled" aria-label="Not favorited">
+                                    <svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
                                         <use href="#icon-heart"></use>
                                     </svg>
                                     {% endif %}
+                                </div>
                                 {% endif %}
                             </div>
                         </div>
@@ -80,15 +84,17 @@
                         fetchpriority="high"
                         decoding="async">
                     {% if user.is_authenticated %}
+                    <div class="heart-wrapper" hx-get="{% url 'toggle_favorite_drink' drink.slug %}" hx-target="this" hx-swap="innerHTML" style="cursor: pointer;">
                         {% if drink.is_favorited %}
-                        <svg class="detail-heart-overlay detail-heart-filled" aria-label="Favorited drink">
+                        <svg class="detail-heart-overlay detail-heart-filled detail-heart-clickable" aria-label="Favorited drink">
                             <use href="#icon-heart-fill"></use>
                         </svg>
                         {% else %}
-                        <svg class="detail-heart-overlay detail-heart-unfilled" aria-label="Not favorited">
+                        <svg class="detail-heart-overlay detail-heart-unfilled detail-heart-clickable" aria-label="Not favorited">
                             <use href="#icon-heart"></use>
                         </svg>
                         {% endif %}
+                    </div>
                     {% endif %}
                 </div>
                 {% endif %}
