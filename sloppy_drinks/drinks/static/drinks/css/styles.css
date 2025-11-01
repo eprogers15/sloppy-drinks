@@ -249,6 +249,11 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     border: 0;
 }
 
+.card-img-wrapper {
+    position: relative;
+    width: 100%;
+}
+
 .card-img-top {
     border-radius: 0%;
     aspect-ratio: 1 / 1;
@@ -256,6 +261,8 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     /* Optimize image rendering */
     image-rendering: -webkit-optimize-contrast;
     image-rendering: crisp-edges;
+    width: 100%;
+    display: block;
 }
 
 .card {
@@ -575,3 +582,16 @@ body,
 /* UX: Button micro-feedback */
 .btn { transition: transform var(--transition-fast); }
 .btn:active { transform: scale(0.98); }
+
+/* Favorite heart overlay */
+.favorite-heart-overlay {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 24px;
+    height: 24px;
+    fill: #dc3545;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+    z-index: 1;
+    pointer-events: none;
+}

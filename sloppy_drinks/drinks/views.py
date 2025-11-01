@@ -8,7 +8,7 @@ from django.db.models import Q, Prefetch, Min, Count, Subquery
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from drinks.forms import CustomLoginForm
-from drinks.models import Drink, Ingredient, Image, Episode
+from drinks.models import Drink, Ingredient, Image, Episode, FavoriteDrink
 from .forms import CustomUserCreationForm
 
 # Initialize logger for this module
@@ -20,6 +20,7 @@ def drink_index(request):
             Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), 
             Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="recipe_image")
         ).annotate(episode_number=Min('episode__number')).order_by('name')
+        
         filter_ingredients = Ingredient.objects.filter(filter=True).order_by('name')
         
         # Handle pagination with error checking
@@ -33,6 +34,20 @@ def drink_index(request):
         
         paginator = Paginator(object_list=drinks, per_page=15)
         page = paginator.get_page(page_num)
+        
+        # Add favorite status for authenticated users after pagination
+        if request.user.is_authenticated:
+            favorite_drink_names = set(
+                FavoriteDrink.objects.filter(user=request.user)
+                .values_list('drink__name', flat=True)
+            )
+            # Annotate each drink in the page with favorite status
+            for drink in page.object_list:
+                drink.is_favorited = drink.name in favorite_drink_names
+        else:
+            # Set is_favorited to False for non-authenticated users
+            for drink in page.object_list:
+                drink.is_favorited = False
         
         return render(
             request=request,
@@ -125,6 +140,20 @@ def drink_index_partial(request):
             
         paginator = Paginator(object_list=drinks, per_page=15)
         page = paginator.get_page(page_num)
+        
+        # Add favorite status for authenticated users after pagination
+        if request.user.is_authenticated:
+            favorite_drink_names = set(
+                FavoriteDrink.objects.filter(user=request.user)
+                .values_list('drink__name', flat=True)
+            )
+            # Annotate each drink in the page with favorite status
+            for drink in page.object_list:
+                drink.is_favorited = drink.name in favorite_drink_names
+        else:
+            # Set is_favorited to False for non-authenticated users
+            for drink in page.object_list:
+                drink.is_favorited = False
         
         filter_ingredients = Ingredient.objects.filter(filter=True).order_by('name')
 
