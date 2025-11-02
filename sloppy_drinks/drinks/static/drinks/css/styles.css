@@ -146,6 +146,52 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     transition: transform var(--transition-fast);
 }
 
+/* Borders between navbar sections */
+/* Desktop (md and above): right borders between profile, about, and contact */
+@media (min-width: 768px) {
+    /* Profile section - right border with inset margins */
+    #navbar-collapse-section .row > .col-md-4:not(.d-none) {
+        position: relative;
+    }
+    #navbar-collapse-section .row > .col-md-4:not(.d-none)::after {
+        content: '';
+        position: absolute;
+        top: 0.75rem;
+        bottom: 0.75rem;
+        right: 1rem;
+        width: 1px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    /* About section - right border with inset margins (4th child is the desktop About section) */
+    #navbar-collapse-section .row > .col-md-4.d-none.d-md-block:nth-child(4) {
+        position: relative;
+    }
+    #navbar-collapse-section .row > .col-md-4.d-none.d-md-block:nth-child(4)::after {
+        content: '';
+        position: absolute;
+        top: 0.75rem;
+        bottom: 0.75rem;
+        right: 1rem;
+        width: 1px;
+        background-color: rgba(255, 255, 255, 0.2);
+    }
+}
+
+/* Mobile: top borders on about and contact sections with inset margins */
+#navbar-collapse-section .row > .col-12.d-md-none {
+    position: relative;
+}
+#navbar-collapse-section .row > .col-12.d-md-none::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 /* Search bar container - unified styling */
 .input-group#search-input-group {
     border-radius: 4px;
