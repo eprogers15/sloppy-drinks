@@ -237,6 +237,19 @@ def drink_detail(request, slug):
             similar_drinks = drink.get_similar_drinks().prefetch_related(
                 Prefetch('image_set', Image.objects.filter(recipe=True), to_attr="recipe_image")
             )
+            # Add favorite status for authenticated users
+            if request.user.is_authenticated:
+                favorite_drink_names = set(
+                    FavoriteDrink.objects.filter(user=request.user)
+                    .values_list('drink__name', flat=True)
+                )
+                # Annotate each similar drink with favorite status
+                for similar_drink in similar_drinks:
+                    similar_drink.is_favorited = similar_drink.name in favorite_drink_names
+            else:
+                # Set is_favorited to False for non-authenticated users
+                for similar_drink in similar_drinks:
+                    similar_drink.is_favorited = False
         except Exception as e:
             logger.error(f'Error calculating similar drinks for {slug}: {e}')
             similar_drinks = []
