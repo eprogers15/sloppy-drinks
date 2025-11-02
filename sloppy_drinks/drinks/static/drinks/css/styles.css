@@ -439,19 +439,59 @@ footer {
     --row-gap-small: 0.25rem; /* Reduced gap between rows on small screens */
 }
 
-/* Responsive adjustments for search bar controls */
-@media (max-width: 991.98px) {
-    /* On small/medium screens when stacked, reduce spacing between rows */
-    #search-bar-form {
-        padding-bottom: var(--row-gap-small);
-    }
-    
-    .dropdown.col-6 {
-        padding-top: var(--row-gap-small);
-    }
+/* Filters accordion button styling */
+.filters-accordion-button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: transform var(--transition-fast);
 }
 
+.filters-accordion-button:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+.filters-chevron {
+    transition: transform var(--transition-fast);
+}
+
+.filters-accordion-button[aria-expanded="true"] .filters-chevron {
+    transform: rotate(180deg);
+}
+
+/* On large screens, always show filters collapse (override Bootstrap collapse) */
 @media (min-width: 992px) {
+    #filters-collapse {
+        display: block !important;
+        height: auto !important;
+        visibility: visible !important;
+    }
+    
+    /* Remove collapse wrapper styling on large screens */
+    .filters-collapse-wrapper {
+        padding: 0;
+    }
+    
+    /* On large screens, make inner row use flexbox to align buttons horizontally */
+    #filters-collapse .row {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+    }
+    
+    /* On large screens, adjust column widths inside collapse */
+    #filters-collapse .dropdown.col-lg-4 {
+        flex: 0 0 calc(4/7 * 100%) !important;
+        max-width: calc(4/7 * 100%) !important;
+    }
+    
+    #filters-collapse .dropdown.col-lg-3 {
+        flex: 0 0 calc(3/7 * 100%) !important;
+        max-width: calc(3/7 * 100%) !important;
+    }
+    
     /* On large screens, all controls on one row - ensure proper alignment */
     #search-bar-form,
     .dropdown.col-lg-4,
@@ -465,6 +505,18 @@ footer {
     #filter-button,
     #sort-button {
         flex: 1 0 auto;
+    }
+}
+
+/* Responsive adjustments for search bar controls */
+@media (max-width: 991.98px) {
+    /* On small/medium screens when stacked, reduce spacing between rows */
+    #search-bar-form {
+        padding-bottom: var(--row-gap-small);
+    }
+    
+    .dropdown.col-6 {
+        padding-top: var(--row-gap-small);
     }
 }
 

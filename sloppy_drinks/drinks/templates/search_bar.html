@@ -26,40 +26,55 @@
                     </div>
                     <span id="search-description" class="visually-hidden">Type to filter drinks by name or ingredient</span>
                 </form>
-                <div class="dropdown col-6 col-lg-4 pt-3 pt-lg-3 pb-3 text-center">
-                    <button class="btn dropdown-toggle w-100 search-control-button" id="filter-button" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" aria-label="Filter by ingredients" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
-                        hx-trigger="change from:.dropdown-filter-item delay:0.2s"
-                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
-                    <ul class="dropdown-menu ingredients-dropdown-list" role="group" aria-label="Ingredient filters">
-                        {% for filter_ingredient in filter_ingredients %}
-                        <li class="dropdown-item dropdown-filter-item">
-                            <input type="checkbox" class="dropdown-filter-checkbox" id="{{ filter_ingredient.name }}"
-                                name="dropdown-filter-checkbox" aria-label="Filter by {{ filter_ingredient.name }}">
-                            <label for="{{ filter_ingredient.name }}">{{ filter_ingredient.name }}</label>
-                        </li>
-                        {% endfor %}
-                        <li class="clear-filter-button-and-divider" id="clearFilterButtonAndDivider">
-                            <div class="dropdown-divider"></div>
-                            <button class="dropdown-item clear-filter-button" id="clearFilterButton" hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
-                            hx-include="#search-bar, #sort-hidden, #filter-hidden">Clear Filters</button>
-                        </li>
-                    </ul>
-                    <input type="hidden" id="filter-hidden" name="filter">
+                <!-- Filters accordion button for small screens -->
+                <div class="col-12 d-lg-none pt-3 pb-3 text-center">
+                    <button class="btn btn-outline-dark filters-accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#filters-collapse"
+                        aria-expanded="false" aria-controls="filters-collapse" aria-label="Toggle filters">
+                        Filters
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down filters-chevron" viewBox="0 0 16 16" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
                 </div>
-                <div class="dropdown col-6 col-lg-3 pt-3 pt-lg-3 pb-3 text-center">
-                    <button class="btn dropdown-toggle w-100 search-control-button" id="sort-button" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false" aria-label="Sort drinks" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
-                        hx-trigger="click from:.dropdown-sort-item delay:0.2s"
-                        hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
-                        A-Z</button>
-                    <ul class="dropdown-menu" role="menu" aria-label="Sort options">
-                        <li><a class="dropdown-item dropdown-sort-item active" value="name" role="menuitem" tabindex="0">A-Z</a></li>
-                        <li><a class="dropdown-item dropdown-sort-item" value="-name" role="menuitem" tabindex="0">Z-A</a></li>
-                        <li><a class="dropdown-item dropdown-sort-item" value="-episode_number" role="menuitem" tabindex="0">New-Old</a></li>
-                        <li><a class="dropdown-item dropdown-sort-item" value="episode_number" role="menuitem" tabindex="0">Old-New</a></li>
-                    </ul>
-                    <input type="hidden" id="sort-hidden" name="sort" value="name">
+                <!-- Filters collapse container (visible on small screens via collapse, always visible on large screens via CSS) -->
+                <div class="collapse col-12 col-lg-7 filters-collapse-wrapper" id="filters-collapse">
+                    <div class="row">
+                        <div class="dropdown col-6 col-lg-4 pt-3 pt-lg-3 pb-3 text-center">
+                            <button class="btn dropdown-toggle w-100 search-control-button" id="filter-button" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" aria-label="Filter by ingredients" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                                hx-trigger="change from:.dropdown-filter-item delay:0.2s"
+                                hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
+                            <ul class="dropdown-menu ingredients-dropdown-list" role="group" aria-label="Ingredient filters">
+                                {% for filter_ingredient in filter_ingredients %}
+                                <li class="dropdown-item dropdown-filter-item">
+                                    <input type="checkbox" class="dropdown-filter-checkbox" id="{{ filter_ingredient.name }}"
+                                        name="dropdown-filter-checkbox" aria-label="Filter by {{ filter_ingredient.name }}">
+                                    <label for="{{ filter_ingredient.name }}">{{ filter_ingredient.name }}</label>
+                                </li>
+                                {% endfor %}
+                                <li class="clear-filter-button-and-divider" id="clearFilterButtonAndDivider">
+                                    <div class="dropdown-divider"></div>
+                                    <button class="dropdown-item clear-filter-button" id="clearFilterButton" hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
+                                    hx-include="#search-bar, #sort-hidden, #filter-hidden">Clear Filters</button>
+                                </li>
+                            </ul>
+                            <input type="hidden" id="filter-hidden" name="filter">
+                        </div>
+                        <div class="dropdown col-6 col-lg-3 pt-3 pt-lg-3 pb-3 text-center">
+                            <button class="btn dropdown-toggle w-100 search-control-button" id="sort-button" type="button" data-bs-toggle="dropdown"
+                                aria-expanded="false" aria-label="Sort drinks" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
+                                hx-trigger="click from:.dropdown-sort-item delay:0.2s"
+                                hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
+                                A-Z</button>
+                            <ul class="dropdown-menu" role="menu" aria-label="Sort options">
+                                <li><a class="dropdown-item dropdown-sort-item active" value="name" role="menuitem" tabindex="0">A-Z</a></li>
+                                <li><a class="dropdown-item dropdown-sort-item" value="-name" role="menuitem" tabindex="0">Z-A</a></li>
+                                <li><a class="dropdown-item dropdown-sort-item" value="-episode_number" role="menuitem" tabindex="0">New-Old</a></li>
+                                <li><a class="dropdown-item dropdown-sort-item" value="episode_number" role="menuitem" tabindex="0">Old-New</a></li>
+                            </ul>
+                            <input type="hidden" id="sort-hidden" name="sort" value="name">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
