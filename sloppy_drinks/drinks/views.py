@@ -295,9 +295,11 @@ def toggle_favorite_drink(request, slug):
     try:
         drink = get_object_or_404(Drink, slug=slug)
         is_favorited = FavoriteDrink.toggle_favorite_drink(request.user, drink)
+        favorite_count = request.user.favoritedrink_set.count()
         
         return render(request, 'heart_icon_partial.html', {
-            'is_favorited': is_favorited
+            'is_favorited': is_favorited,
+            'favorite_count': favorite_count
         })
     except Exception as e:
         logger.error(f'Error toggling favorite for slug {slug}: {e}', exc_info=True)
