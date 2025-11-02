@@ -458,12 +458,29 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     padding-bottom: 8px;
 }
 
+/* Staggered card animations */
 #results .drink {
-    opacity: 1;
-    animation-name: fadeInOpacity;
-    animation-iteration-count: 1;
-    animation-timing-function: ease-in;
-    animation-duration: 0.5s;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUpFade 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+#results .drink:nth-child(1) { animation-delay: 0.05s; }
+#results .drink:nth-child(2) { animation-delay: 0.1s; }
+#results .drink:nth-child(3) { animation-delay: 0.15s; }
+#results .drink:nth-child(4) { animation-delay: 0.2s; }
+#results .drink:nth-child(5) { animation-delay: 0.25s; }
+#results .drink:nth-child(6) { animation-delay: 0.3s; }
+#results .drink:nth-child(7) { animation-delay: 0.35s; }
+#results .drink:nth-child(8) { animation-delay: 0.4s; }
+#results .drink:nth-child(9) { animation-delay: 0.45s; }
+#results .drink:nth-child(n+10) { animation-delay: 0.5s; }
+
+@keyframes slideUpFade {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeInOpacity {
@@ -495,15 +512,36 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     image-rendering: crisp-edges;
     width: 100%;
     display: block;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                filter 0.3s ease;
 }
 
+#drinks .card:hover .card-img-top {
+    transform: scale(1.02);
+    filter: brightness(1.03);
+}
+
+/* Enhanced card hover effects */
 .card {
     opacity: 1;
     transition: opacity 0.3s;
 }
 
+#drinks .card {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease;
+    cursor: pointer;
+}
+
 #drinks .card:hover {
-    opacity: 0.9;
+    transform: translateY(-2px) scale(1.01);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    opacity: 1;
+}
+
+#drinks .card:active {
+    transform: translateY(-1px) scale(1);
 }
 
 /* Focus indicator for card links */
@@ -536,14 +574,31 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     animation-fill-mode: forwards;
 }
 
+/* Enhanced no-match state */
 .no-match-icon {
     color: var(--color-primary-dark);
-    opacity: 0.6;
+    opacity: 0;
     margin-bottom: 24px;
     display: block;
     margin-left: auto;
     margin-right: auto;
     overflow: visible;
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3) translateY(-20px);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.1) translateY(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .no-match-heading {
@@ -552,6 +607,19 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     font-weight: 600;
     margin-bottom: 12px;
     line-height: 1.4;
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 0.3s forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .no-match-suggestion {
@@ -559,7 +627,8 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     font-size: 1rem;
     line-height: 1.6;
     margin-bottom: 0;
-    opacity: 0.85;
+    opacity: 0;
+    animation: fadeInUp 0.5s ease 0.5s forwards;
 }
 
 .no-match-accent {
@@ -580,6 +649,59 @@ footer {
     color: var(--color-white);
 }
 
+/* Enhanced tab navigation */
+.nav-tabs .nav-link {
+    position: relative;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 0.5rem;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+}
+
+.nav-tabs .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--color-primary-dark);
+    background-color: rgba(54, 54, 54, 0.05);
+    border-bottom-color: transparent;
+}
+
+.nav-tabs .nav-link:hover::after {
+    width: 50%;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--color-primary-dark);
+    font-weight: 600;
+    border-bottom-color: transparent;
+}
+
+.nav-tabs .nav-link.active::after {
+    width: 100%;
+    background-color: var(--color-accent);
+    animation: underlineSlide 0.3s ease;
+}
+
+@keyframes underlineSlide {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
 .nav-link,
 .nav-link:hover {
     color: var(--color-primary-dark);
@@ -589,6 +711,30 @@ footer {
 .nav-link:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
+}
+
+/* Tab content transitions */
+.tab-pane {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.tab-pane.active {
+    opacity: 1;
+    transform: translateY(0);
+    animation: tabContentFadeIn 0.4s ease;
+}
+
+@keyframes tabContentFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .svg-icon-link {
@@ -623,13 +769,99 @@ footer {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
 }
 
+/* Similar drinks section */
 .similar-drinks-heading {
     color: var(--color-primary-dark);
     font-size: 20px;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: fadeInDown 0.5s ease 0.2s forwards;
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#similar-drinks-container .drink {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: scaleIn 0.4s ease forwards;
+}
+
+#similar-drinks-container .drink:nth-child(1) { animation-delay: 0.3s; }
+#similar-drinks-container .drink:nth-child(2) { animation-delay: 0.35s; }
+#similar-drinks-container .drink:nth-child(3) { animation-delay: 0.4s; }
+#similar-drinks-container .drink:nth-child(4) { animation-delay: 0.45s; }
+#similar-drinks-container .drink:nth-child(5) { animation-delay: 0.5s; }
+#similar-drinks-container .drink:nth-child(n+6) { animation-delay: 0.55s; }
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .drink-name-highlight {
     color: var(--color-accent);
+}
+
+/* Enhanced link hover effects */
+.recipe-link,
+.image-source-link {
+    position: relative;
+    color: var(--color-primary-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.recipe-link::after,
+.image-source-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent);
+    transition: width 0.3s ease;
+}
+
+.recipe-link:hover,
+.image-source-link:hover {
+    color: var(--color-accent);
+}
+
+.recipe-link:hover::after,
+.image-source-link:hover::after {
+    width: 100%;
+}
+
+/* Card content animations */
+.card-body {
+    animation: fadeInUp 0.5s ease 0.2s both;
+}
+
+.list-group-item {
+    opacity: 0;
+    transform: translateX(-10px);
+    animation: slideInLeft 0.4s ease forwards;
+}
+
+.list-group-item:nth-child(1) { animation-delay: 0.1s; }
+.list-group-item:nth-child(2) { animation-delay: 0.2s; }
+.list-group-item:nth-child(3) { animation-delay: 0.3s; }
+.list-group-item:nth-child(4) { animation-delay: 0.4s; }
+.list-group-item:nth-child(n+5) { animation-delay: 0.5s; }
+
+@keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Search bar, filter, and sort - consistent sizing and alignment */
@@ -920,11 +1152,105 @@ footer {
     outline-offset: -2px;
 }
 
-/* Improve carousel button focus */
+/* Enhanced carousel controls */
+.carousel-control-prev,
+.carousel-control-next {
+    transition: all 0.3s ease, background-color 0.3s ease;
+    opacity: 0.7;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(54, 54, 54, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 1;
+    background: rgba(54, 54, 54, 0.8);
+    transform: scale(1.1);
+}
+
+.carousel-control-prev:active,
+.carousel-control-next:active {
+    transform: scale(0.95);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    transition: transform 0.3s ease;
+}
+
+.carousel-control-prev:hover .carousel-control-prev-icon {
+    transform: translateX(-2px);
+}
+
+.carousel-control-next:hover .carousel-control-next-icon {
+    transform: translateX(2px);
+}
+
 .carousel-control-prev:focus-visible,
 .carousel-control-next:focus-visible {
     outline: 3px solid var(--color-primary-dark);
     outline-offset: 2px;
+}
+
+/* Enhanced carousel indicators */
+.carousel-indicators button {
+    transition: all 0.3s ease, transform 0.3s ease;
+    opacity: 0.5;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.carousel-indicators button:hover {
+    opacity: 0.75;
+    transform: scale(1.2);
+}
+
+.carousel-indicators button.active {
+    opacity: 1;
+    transform: scale(1.3);
+    animation: indicatorActive 0.3s ease;
+}
+
+@keyframes indicatorActive {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1.3);
+    }
+}
+
+/* Enhanced carousel slide transitions */
+.carousel-item {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel-item img {
+    transition: opacity 0.3s ease;
+    opacity: 0;
+}
+
+.carousel-item.active img {
+    opacity: 1;
+    animation: imageFadeIn 0.4s ease;
+}
+
+@keyframes imageFadeIn {
+    from {
+        opacity: 0;
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
 }
 
 /* Custom Scrollbar (non-intrusive) */
@@ -974,7 +1300,14 @@ footer {
 .navbar-toggler,
 .filters-accordion-button,
 #clear-button,
-.dropdown-menu {
+.dropdown-menu,
+#drinks .card,
+.carousel-control-prev,
+.carousel-control-next,
+.nav-tabs .nav-link,
+.detail-heart-clickable,
+.tab-pane,
+#similar-drinks-container .drink {
     will-change: transform, opacity;
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -1032,7 +1365,16 @@ body,
     border: 3px solid var(--color-primary-dark);
     border-top-color: transparent;
     border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    animation: spin 0.8s linear infinite, fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 /* UX: Image error states */
@@ -1067,6 +1409,23 @@ body,
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
     z-index: 1;
     pointer-events: none;
+    opacity: 0;
+    animation: heartFadeIn 0.4s ease 0.2s forwards, heartPulse 0.6s ease 0.6s;
+}
+
+@keyframes heartFadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes heartPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
 }
 
 /* Detail page heart overlay - separate from index page styles */
@@ -1111,13 +1470,67 @@ a.heart-wrapper {
     color: inherit;
 }
 
+/* Enhanced heart icon on detail page */
 .detail-heart-clickable {
     pointer-events: all;
-    transition: transform var(--transition-fast);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.detail-heart-clickable:hover {
+    transform: scale(1.15);
 }
 
 .detail-heart-clickable:active {
     transform: scale(0.9);
+    animation: heartBeat 0.4s ease;
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Favorite toggle animations */
+.detail-heart-filled {
+    animation: favoriteToggle 0.5s ease;
+}
+
+.detail-heart-unfilled {
+    animation: unfavoriteToggle 0.5s ease;
+}
+
+@keyframes favoriteToggle {
+    0% {
+        transform: scale(1);
+    }
+    30% {
+        transform: scale(1.3);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes unfavoriteToggle {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.8);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .detail-heart-filled {
