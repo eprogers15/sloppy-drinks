@@ -38,9 +38,13 @@ const searchInputGroup = document.getElementById('search-input-group');
 if (searchBar && clearButton && searchInputGroup) {
   searchBar.addEventListener('input', () => {
     if (searchBar.value) {
+      clearButton.classList.add('clear-button-visible');
       clearButton.style.display = 'flex';
       searchBar.classList.add('clear-visible');
+      // Trigger reflow to ensure animation starts
+      clearButton.offsetHeight;
     } else {
+      clearButton.classList.remove('clear-button-visible');
       clearButton.style.display = 'none';
       searchBar.classList.remove('clear-visible');
     }
@@ -62,6 +66,7 @@ if (searchBar && clearButton && searchInputGroup) {
   clearButton.addEventListener('click', () => {
     searchBar.value = '';
     searchBar.focus();
+    clearButton.classList.remove('clear-button-visible');
     clearButton.style.display = 'none';
     searchBar.classList.remove('clear-visible');
     
@@ -476,17 +481,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// HTMX indicator show/hide and SR announcement
+// Screen reader announcement
 document.addEventListener('DOMContentLoaded', () => {
-  document.body.addEventListener('htmx:beforeRequest', () => {
-    const indicator = document.querySelector('.htmx-indicator');
-    if (indicator) indicator.style.display = 'inline-block';
-  });
-  document.body.addEventListener('htmx:afterRequest', () => {
-    const indicator = document.querySelector('.htmx-indicator');
-    if (indicator) setTimeout(() => { indicator.style.display = 'none'; }, 200);
-  });
-
   document.body.addEventListener('htmx:afterSwap', () => {
     const announcement = document.createElement('div');
     announcement.setAttribute('role', 'status');
