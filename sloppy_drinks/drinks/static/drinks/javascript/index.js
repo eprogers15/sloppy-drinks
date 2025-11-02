@@ -216,6 +216,37 @@ if (ingredientsList) {
 }
 
 // ============================================================================
+// 3.5. FAVORITES CHECKBOX FUNCTIONALITY
+// ============================================================================
+
+/**
+ * Update favorites hidden input based on checkbox state
+ * Syncs the hidden input value with the checkbox state
+ */
+function updateFavoritesHidden() {
+  const favoritesCheckbox = document.getElementById('favorites-checkbox');
+  const favoritesHidden = document.getElementById('favorites-hidden');
+  
+  if (favoritesCheckbox && favoritesHidden) {
+    // Set hidden input value to "true" if checked, empty string if unchecked
+    favoritesHidden.setAttribute('value', favoritesCheckbox.checked ? 'true' : '');
+  }
+}
+
+/**
+ * Event listener for favorites checkbox
+ * Updates hidden input when checkbox state changes
+ */
+const favoritesCheckbox = document.getElementById('favorites-checkbox');
+if (favoritesCheckbox) {
+  // Initialize hidden input on page load
+  updateFavoritesHidden();
+  
+  // Update hidden input when checkbox changes
+  favoritesCheckbox.addEventListener('change', updateFavoritesHidden);
+}
+
+// ============================================================================
 // 4. CAROUSEL FUNCTIONALITY (Drink Detail Page)
 // ============================================================================
 

@@ -11,12 +11,12 @@
                             aria-label="Search by drink or ingredient" name="q"
                             placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
                             hx-target="#results" hx-trigger="input delay:0.2s"
-                            hx-include="#sort-hidden, #filter-hidden"
+                            hx-include="#sort-hidden, #filter-hidden, #favorites-hidden"
                             aria-describedby="search-description">
                         <button type="button" class="btn btn-outline-dark" id="clear-button"
                             aria-label="Clear search"
                             hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
-                            hx-include="#search-bar, #sort-hidden, #filter-hidden">
+                            hx-include="#search-bar, #sort-hidden, #filter-hidden, #favorites-hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                 class="bi bi-x" viewBox="0 0 16 16" aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -43,7 +43,7 @@
                             <button class="btn dropdown-toggle w-100 search-control-button" id="filter-button" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false" aria-label="Filter by ingredients" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                                 hx-trigger="change from:.dropdown-filter-item delay:0.2s"
-                                hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
+                                hx-include="#search-bar, #sort-hidden, #filter-hidden, #favorites-hidden">Ingredients</button>
                             <ul class="dropdown-menu ingredients-dropdown-list" role="group" aria-label="Ingredient filters">
                                 {% for filter_ingredient in filter_ingredients %}
                                 <li class="dropdown-item dropdown-filter-item">
@@ -55,7 +55,7 @@
                                 <li class="clear-filter-button-and-divider" id="clearFilterButtonAndDivider">
                                     <div class="dropdown-divider"></div>
                                     <button class="dropdown-item clear-filter-button" id="clearFilterButton" hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="click"
-                                    hx-include="#search-bar, #sort-hidden, #filter-hidden">Clear Filters</button>
+                                    hx-include="#search-bar, #sort-hidden, #filter-hidden, #favorites-hidden">Clear Filters</button>
                                 </li>
                             </ul>
                             <input type="hidden" id="filter-hidden" name="filter">
@@ -64,7 +64,7 @@
                             <button class="btn dropdown-toggle w-100 search-control-button" id="sort-button" type="button" data-bs-toggle="dropdown"
                                 aria-expanded="false" aria-label="Sort drinks" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                                 hx-trigger="click from:.dropdown-sort-item delay:0.2s"
-                                hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:
+                                hx-include="#search-bar, #sort-hidden, #filter-hidden, #favorites-hidden">Sort:
                                 A-Z</button>
                             <ul class="dropdown-menu" role="menu" aria-label="Sort options">
                                 <li><a class="dropdown-item dropdown-sort-item active" value="name" role="menuitem" tabindex="0">A-Z</a></li>
@@ -76,9 +76,12 @@
                         </div>
                         <div class="col-12 col-lg-4 pt-3 pt-lg-3 pb-3 text-center d-flex align-items-center justify-content-center">
                             <label class="favorites-checkbox-label" for="favorites-checkbox">
-                                <input type="checkbox" class="favorites-checkbox" id="favorites-checkbox" name="favorites" aria-label="My Favorites">
+                                <input type="checkbox" class="favorites-checkbox" id="favorites-checkbox" aria-label="My Favorites"
+                                    hx-get="{% url 'drink_index_partial' %}" hx-target="#results" hx-trigger="change delay:0.2s"
+                                    hx-include="#search-bar, #sort-hidden, #filter-hidden, #favorites-hidden">
                                 My Favorites
                             </label>
+                            <input type="hidden" id="favorites-hidden" name="favorites" value="">
                         </div>
                     </div>
                 </div>

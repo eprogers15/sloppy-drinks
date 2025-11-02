@@ -100,6 +100,22 @@ def drink_index_partial(request):
         else:
             filter_values = []
         
+        # Get and validate favorites parameter
+        favorites_param = request.GET.get('favorites', '').strip()
+        favorites_filter = favorites_param.lower() in ('true', '1', 'on', 'yes')
+        
+        # If favorites is checked but user is not authenticated, redirect to login
+        if favorites_filter and not request.user.is_authenticated:
+            # Check if this is an HTMX request
+            if request.headers.get('HX-Request'):
+                # For HTMX requests, return a redirect response
+                from django.http import HttpResponse
+                response = HttpResponse()
+                response['HX-Redirect'] = reverse('login')
+                return response
+            else:
+                return redirect('login')
+        
         # Handle pagination with error checking
         try:
             page_num = int(request.GET.get('page', 1))
@@ -111,6 +127,13 @@ def drink_index_partial(request):
         
         # Build queries with proper error handling
         drinks = Drink.objects.all()
+        
+        # Apply favorites filter if checked and user is authenticated
+        if favorites_filter and request.user.is_authenticated:
+            favorite_drink_names = FavoriteDrink.objects.filter(
+                user=request.user
+            ).values_list('drink__name', flat=True)
+            drinks = drinks.filter(name__in=favorite_drink_names)
         
         if filter_values:
             ingredients_filter_subquery = Drink.objects.filter(
@@ -124,14 +147,13 @@ def drink_index_partial(request):
                 Q(name__icontains=search) | Q(ingredients__name__icontains=search)
             ).values('name')
         
-        if search and filter_values:
-            drinks = drinks.filter(name__in=ingredients_filter_subquery).filter(
-                name__in=Subquery(search_filter_subquery)
-            )
-        elif search and not filter_values:
-            drinks = drinks.filter(name__in=Subquery(search_filter_subquery))
-        elif filter_values and not search:
+        # Apply ingredient filter if specified
+        if filter_values:
             drinks = drinks.filter(name__in=Subquery(ingredients_filter_subquery))
+        
+        # Apply search filter if specified
+        if search:
+            drinks = drinks.filter(name__in=Subquery(search_filter_subquery))
         
         drinks = drinks.prefetch_related(
             Prefetch('episode_set', queryset=Episode.objects.all(), to_attr="episode_number"), 
