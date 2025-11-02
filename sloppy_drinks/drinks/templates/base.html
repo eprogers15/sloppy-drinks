@@ -59,9 +59,13 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-section">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-4 py-3">
+                    <div class="col-md-4 py-3 nav-profile-container">
                         <h4 class="nav-profile-heading">Hi, {{ user.username|default:"Guest" }}!</h4>
-                        <nav aria-label="User account navigation">
+                        {% if user.is_authenticated %}
+                            <p class="nav-profile-info mb-1">Member since {{ user.date_joined|date:"M d, Y" }}</p>
+                            <p class="nav-profile-info mb-2">{{ user.favoritedrink_set.count }} favorite{% if user.favoritedrink_set.count != 1 %}s{% endif %}</p>
+                        {% endif %}
+                        <nav class="nav-profile-links" aria-label="User account navigation">
                         {% if user.is_authenticated %}
                             <div class="mt-1">
                                 <a class="nav-profile-link text-decoration-none" href="{% url 'password_change' %}">Reset Password</a>
