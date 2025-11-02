@@ -38,7 +38,7 @@ const searchInputGroup = document.getElementById('search-input-group');
 if (searchBar && clearButton && searchInputGroup) {
   searchBar.addEventListener('input', () => {
     if (searchBar.value) {
-      clearButton.style.display = 'block';
+      clearButton.style.display = 'flex';
       searchBar.classList.add('clear-visible');
     } else {
       clearButton.style.display = 'none';

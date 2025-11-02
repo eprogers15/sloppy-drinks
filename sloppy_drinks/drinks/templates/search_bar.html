@@ -3,10 +3,10 @@
 <div class="container-fluid search_bar">
     <div class="row justify-content-center">
         <div class="col-md-8 center-column">
-            <div class="row">
-                <form class="form-inline col-lg-5 pt-3" id="search-bar-form" role="search" aria-label="Search drinks">
+            <div class="row search-bar-row">
+                <form class="form-inline col-12 col-lg-5 pt-3 pb-3 pb-lg-3" id="search-bar-form" role="search" aria-label="Search drinks">
                     <label for="search-bar" class="visually-hidden">Search by drink or ingredient</label>
-                    <div class="input-group" id="search-input-group">
+                    <div class="input-group search-bar-input-group" id="search-input-group">
                         <input type="text" class="form-control" id="search-bar"
                             aria-label="Search by drink or ingredient" name="q"
                             placeholder="Search by drink or ingredient" hx-get="{% url 'drink_index_partial' %}"
@@ -26,8 +26,8 @@
                     </div>
                     <span id="search-description" class="visually-hidden">Type to filter drinks by name or ingredient</span>
                 </form>
-                <div class="dropdown col pt-3 text-center">
-                    <button class="btn dropdown-toggle w-100" id="filter-button" type="button" data-bs-toggle="dropdown"
+                <div class="dropdown col-6 col-lg-4 pt-3 pt-lg-3 pb-3 text-center">
+                    <button class="btn dropdown-toggle w-100 search-control-button" id="filter-button" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" aria-label="Filter by ingredients" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                         hx-trigger="change from:.dropdown-filter-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Ingredients</button>
@@ -47,8 +47,8 @@
                     </ul>
                     <input type="hidden" id="filter-hidden" name="filter">
                 </div>
-                <div class="dropdown col py-3 text-center">
-                    <button class="btn dropdown-toggle w-100" id="sort-button" type="button" data-bs-toggle="dropdown"
+                <div class="dropdown col-6 col-lg-3 pt-3 pt-lg-3 pb-3 text-center">
+                    <button class="btn dropdown-toggle w-100 search-control-button" id="sort-button" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false" aria-label="Sort drinks" hx-get="{% url 'drink_index_partial' %}" hx-target="#results"
                         hx-trigger="click from:.dropdown-sort-item delay:0.2s"
                         hx-include="#search-bar, #sort-hidden, #filter-hidden">Sort:

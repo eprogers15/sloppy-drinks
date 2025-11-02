@@ -152,6 +152,8 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
     border: 1px solid #ced4da;
     transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
     overflow: hidden; /* Ensure border radius is applied correctly */
+    display: flex;
+    align-items: stretch; /* Ensure all child elements have same height */
 }
 
 /* When input is focused, highlight the entire group */
@@ -180,12 +182,16 @@ button[data-bs-toggle="collapse"][data-bs-target="#contact-collapse"] .contact-c
 }
 
 #clear-button {
-    display: none;
+    display: none; /* JavaScript controls visibility - sets to 'flex' when visible */
     background-color: white;
     border: none;
     border-left: 1px solid #ced4da;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
+    min-height: 44px; /* Match input height for consistency */
+    /* Flex properties apply when JavaScript sets display: flex */
+    align-items: center;
+    justify-content: center;
 }
 
 #clear-button:hover, #clear-button:active {
@@ -395,24 +401,71 @@ footer {
     color: var(--color-accent);
 }
 
-#filter-button {
-    background-color: var(--color-primary-dark);
-    color: var(--color-white);
+/* Search bar, filter, and sort - consistent sizing and alignment */
+.search-bar-input-group {
+    min-height: 44px; /* Ensure minimum touch target size */
 }
 
-#filter-button:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: 2px;
+#search-bar {
+    min-height: 44px; /* Match button heights */
 }
 
+#filter-button,
 #sort-button {
     background-color: var(--color-primary-dark);
     color: var(--color-white);
+    min-height: 44px; /* Ensure minimum touch target size */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+/* Consistent height for all search controls */
+.search-control-button {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#filter-button:focus-visible,
 #sort-button:focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
+}
+
+/* Search bar row - reduce spacing when stacked */
+.search-bar-row {
+    --row-gap-small: 0.25rem; /* Reduced gap between rows on small screens */
+}
+
+/* Responsive adjustments for search bar controls */
+@media (max-width: 991.98px) {
+    /* On small/medium screens when stacked, reduce spacing between rows */
+    #search-bar-form {
+        padding-bottom: var(--row-gap-small);
+    }
+    
+    .dropdown.col-6 {
+        padding-top: var(--row-gap-small);
+    }
+}
+
+@media (min-width: 992px) {
+    /* On large screens, all controls on one row - ensure proper alignment */
+    #search-bar-form,
+    .dropdown.col-lg-4,
+    .dropdown.col-lg-3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    
+    #search-input-group,
+    #filter-button,
+    #sort-button {
+        flex: 1 0 auto;
+    }
 }
 
 .hidden {
