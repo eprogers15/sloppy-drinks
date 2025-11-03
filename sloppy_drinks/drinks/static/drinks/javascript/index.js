@@ -288,11 +288,100 @@ document.addEventListener('DOMContentLoaded', () => {
     imageSourceText.innerHTML = htmlContent;
   }
   
+  /**
+   * Mark image as loaded when it finishes loading
+   * Allows preloaded images to appear instantly when activated
+   */
+  function markImageAsLoaded(img) {
+    if (img.complete && img.naturalHeight !== 0) {
+      img.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        img.classList.add('loaded');
+      }, { once: true });
+      img.addEventListener('error', () => {
+        img.classList.add('loaded'); // Mark as loaded even on error to avoid stuck state
+      }, { once: true });
+    }
+  }
+  
+  /**
+   * Preload adjacent carousel images for faster transitions
+   * Loads the next and previous images so they're ready when user clicks arrows
+   */
+  function preloadAdjacentImages() {
+    const carouselItems = carousel.querySelectorAll('.carousel-item');
+    const activeIndex = Array.from(carouselItems).findIndex(item => 
+      item.classList.contains('active')
+    );
+    
+    if (activeIndex === -1) return;
+    
+    // Preload next image
+    const nextIndex = (activeIndex + 1) % carouselItems.length;
+    const nextItem = carouselItems[nextIndex];
+    if (nextItem) {
+      const nextImg = nextItem.querySelector('img');
+      if (nextImg && nextImg.src) {
+        if (!nextImg.complete) {
+          const preloadLink = document.createElement('link');
+          preloadLink.rel = 'preload';
+          preloadLink.as = 'image';
+          preloadLink.href = nextImg.src;
+          document.head.appendChild(preloadLink);
+          // Force browser to start loading
+          nextImg.loading = 'eager';
+          markImageAsLoaded(nextImg);
+        } else {
+          nextImg.classList.add('loaded');
+        }
+      }
+    }
+    
+    // Preload previous image
+    const prevIndex = (activeIndex - 1 + carouselItems.length) % carouselItems.length;
+    const prevItem = carouselItems[prevIndex];
+    if (prevItem) {
+      const prevImg = prevItem.querySelector('img');
+      if (prevImg && prevImg.src) {
+        if (!prevImg.complete) {
+          const preloadLink = document.createElement('link');
+          preloadLink.rel = 'preload';
+          preloadLink.as = 'image';
+          preloadLink.href = prevImg.src;
+          document.head.appendChild(preloadLink);
+          // Force browser to start loading
+          prevImg.loading = 'eager';
+          markImageAsLoaded(prevImg);
+        } else {
+          prevImg.classList.add('loaded');
+        }
+      }
+    }
+  }
+  
+  // Mark all images as loaded when they finish loading
+  const allImages = carousel.querySelectorAll('.carousel-item img');
+  allImages.forEach(img => {
+    markImageAsLoaded(img);
+    // Mark active image as loaded immediately
+    if (img.closest('.carousel-item.active')) {
+      img.classList.add('loaded');
+    }
+  });
+  
   // Update on initial load
   updateImageSource();
   
+  // Preload adjacent images on initial load
+  preloadAdjacentImages();
+  
   // Update when carousel slides
-  carousel.addEventListener('slid.bs.carousel', updateImageSource);
+  carousel.addEventListener('slid.bs.carousel', () => {
+    updateImageSource();
+    // Preload new adjacent images after slide
+    setTimeout(preloadAdjacentImages, 100);
+  });
   
   /**
    * Prevent carousel navigation when clicking the heart icon

@@ -1244,23 +1244,35 @@ footer {
 
 /* Enhanced carousel slide transitions */
 .carousel-item {
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .carousel-item img {
-    transition: opacity 0.3s ease;
+    transition: opacity 0.2s ease;
     opacity: 0;
+    /* Ensure images start loading immediately */
+    content-visibility: auto;
 }
 
 .carousel-item.active img {
     opacity: 1;
-    animation: imageFadeIn 0.4s ease;
+    animation: imageFadeIn 0.3s ease;
+}
+
+/* Show images that are loaded even if not active yet */
+.carousel-item img.loaded {
+    opacity: 1;
+}
+
+.carousel-item.active img.loaded {
+    opacity: 1;
+    animation: none;
 }
 
 @keyframes imageFadeIn {
     from {
         opacity: 0;
-        filter: blur(5px);
+        filter: blur(3px);
     }
     to {
         opacity: 1;
