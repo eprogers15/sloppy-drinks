@@ -1,5 +1,4 @@
 <form method="post" action="{% url 'logout' %}" style="display: inline;">
     {% csrf_token %}
-    {{ form.as_p }}
     <a href="#" onclick="this.closest('form').submit();" class="nav-profile-link text-decoration-none">Logout</a>
 </form>
