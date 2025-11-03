@@ -71,8 +71,10 @@
                                 {% include "registration/_logout.html" %}
                             </div>
                         {% else %}
-                            <div class="d-flex flex-column mt-2">
-                                <a class="nav-profile-link nav-profile-link-primary text-decoration-none mb-2" href="{% url 'login' %}">Login</a>
+                            <div class="mt-1">
+                                <a class="nav-profile-link nav-profile-link-primary text-decoration-none" href="{% url 'login' %}">Login</a>
+                            </div>
+                            <div class="mt-1">
                                 <a href="{% url 'sign_up' %}" class="nav-profile-link text-decoration-none">Sign Up</a>
                             </div>
                         {% endif %}
